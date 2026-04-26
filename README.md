@@ -1,1 +1,1 @@
-# quiet-wealth-game
+# quiet-wealth
