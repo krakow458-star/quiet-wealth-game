@@ -1,0 +1,956 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>QUIET WEALTH: THE ARCHITECT'S PROTOCOL</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;700&display=swap');
+:root{
+  --bg:#050507;--surface:rgba(20,20,25,0.75);--surface-solid:#0a0a0f;
+  --gold:#d4af37;--gold-light:#f0d078;--gold-dim:#8a6e1a;
+  --green:#00e676;--blue:#00b4d8;--red:#ff4d4d;
+  --text:#e6e6e6;--text-dim:#888;--text-muted:#555;
+  --border:rgba(212,175,55,0.15);--glass:blur(12px) saturate(1.3);
+  --ease-out:cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  --ease-elastic:cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;min-height:100vh;overflow-x:hidden;line-height:1.5;font-size:15px;-webkit-font-smoothing:antialiased}
+body::before{content:'';position:fixed;inset:0;background:radial-gradient(circle at 50% 0%,rgba(212,175,55,0.08),transparent 60%);pointer-events:none;z-index:0}
+body::after{content:'';position:fixed;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,0.05) 2px,rgba(0,0,0,0.05) 4px);pointer-events:none;z-index:9999;opacity:0.3}
+.screen{display:none;position:relative;z-index:1;min-height:100vh}
+.screen.active{display:flex}
+#bg-canvas{position:fixed;inset:0;z-index:0;pointer-events:none}
+
+/* INTRO */
+#intro{min-height:100vh;flex-direction:column;align-items:center;justify-content:center;padding:20px;text-align:center;position:relative;overflow:hidden}
+.glitch-wrap{position:relative;margin-bottom:10px;perspective:1000px}
+.glitch{font-family:'Inter',sans-serif;font-weight:800;font-size:clamp(38px,9vw,88px);letter-spacing:-0.02em;color:var(--gold-light);position:relative;display:inline-block;animation:glitch-main 4s infinite;text-transform:uppercase;filter:drop-shadow(0 0 25px rgba(212,175,55,0.4))}
+.glitch::before,.glitch::after{content:attr(data-text);position:absolute;top:0;left:0;width:100%;height:100%}
+.glitch::before{color:var(--red);animation:glitch-clip1 2.5s infinite linear alternate-reverse;clip-path:inset(20% 0 40% 0);filter:blur(1.5px);mix-blend-mode:screen}
+.glitch::after{color:var(--blue);animation:glitch-clip2 3s infinite linear alternate-reverse;clip-path:inset(60% 0 10% 0);filter:blur(1.5px);mix-blend-mode:screen}
+@keyframes glitch-main{0%,100%{transform:translateZ(0) rotate(0deg)}25%{transform:translateZ(8px) rotate(0.5deg)}50%{transform:translateZ(0);filter:drop-shadow(0 0 40px rgba(212,175,55,0.6))}75%{transform:translateZ(-8px) rotate(-0.5deg)}}
+@keyframes glitch-clip1{0%{transform:translate(0)}20%{transform:translate(-2px,3px)}40%{transform:translate(2px,-2px)}60%{transform:translate(-1px,1px)}80%{transform:translate(2px,-3px)}100%{transform:translate(0)}}
+@keyframes glitch-clip2{0%{transform:translate(0)}20%{transform:translate(2px,-3px)}40%{transform:translate(-2px,2px)}60%{transform:translate(1px,-1px)}80%{transform:translate(-2px,3px)}100%{transform:translate(0)}}
+.logo-sub{font-size:clamp(10px,1.8vw,12px);letter-spacing:0.6em;opacity:0.7;margin-top:4px;animation:sub-pulse 3s ease-in-out infinite;text-transform:uppercase;color:var(--gold);font-weight:500}
+@keyframes sub-pulse{0%,100%{opacity:0.6}50%{opacity:1;transform:scale(1.02)}}
+.tagline{font-size:clamp(13px,2.2vw,16px);color:var(--text-dim);max-width:560px;line-height:1.7;margin:12px auto 20px;font-style:italic;animation:fade-in-up 1s 0.4s both;padding:0 15px}
+.tagline span{color:var(--gold-light);font-weight:600;text-shadow:0 0 12px rgba(212,175,55,0.5)}
+@keyframes fade-in-up{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+
+/* 🔐 SECURE CORE */
+.secure-core{position:relative;margin:18px 0 28px;width:clamp(110px,22vw,190px);height:clamp(110px,22vw,190px);display:flex;align-items:center;justify-content:center;pointer-events:none}
+.core-ring{position:absolute;border-radius:50%;border:2px solid transparent;border-top-color:var(--gold);border-right-color:rgba(212,175,55,0.2);animation:core-spin 5s linear infinite}
+.core-ring:nth-child(1){inset:0;animation-duration:5s}.core-ring:nth-child(2){inset:15%;border-top-color:var(--blue);border-right-color:rgba(0,180,216,0.2);animation-duration:3.5s;animation-direction:reverse}.core-ring:nth-child(3){inset:30%;border-top-color:var(--gold-light);border-right-color:rgba(240,208,120,0.3);animation-duration:2.2s}
+.core-pulse{position:absolute;inset:40%;background:radial-gradient(circle,rgba(212,175,55,0.85)0%,rgba(212,175,55,0.1)60%,transparent 100%);border-radius:50%;animation:core-breathe 2.8s ease-in-out infinite;box-shadow:0 0 25px rgba(212,175,55,0.25)}
+.core-particle{position:absolute;width:3px;height:3px;background:var(--gold-light);border-radius:50%;box-shadow:0 0 4px var(--gold);pointer-events:none}
+@keyframes core-spin{to{transform:rotate(360deg)}}@keyframes core-breathe{0%,100%{transform:scale(0.8);opacity:0.6}50%{transform:scale(1.08);opacity:1}}@keyframes core-float{0%{transform:scale(1);opacity:1}100%{transform:scale(0) translateY(-18px);opacity:0}}
+
+/* CHARACTER SELECT */
+.char-select-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin:14px 0}
+.char-card{background:rgba(255,255,255,0.03);border:1px solid var(--border);padding:12px 8px;cursor:pointer;transition:all .3s var(--ease-out);border-radius:10px;text-align:center;position:relative;overflow:hidden}
+.char-card:hover{border-color:var(--gold);transform:translateY(-2px)}.char-card.selected{border-color:var(--green);background:rgba(0,230,118,.08);box-shadow:0 0 18px rgba(0,230,118,.15)}.char-card.selected::after{content:'✓';position:absolute;top:7px;right:8px;color:var(--green);font-size:10px;font-weight:700}
+.char-preview{width:55px;height:55px;margin:0 auto 6px}.char-name{font-size:10px;letter-spacing:.25em;text-transform:uppercase;font-weight:600;opacity:.8}.char-role{font-size:8px;opacity:.4;margin-top:2px;letter-spacing:.15em}
+
+/* HEADER CHARACTER & PROGRESS */
+.header-char-wrap{display:flex;align-items:center;gap:8px;margin-left:auto;margin-right:6px}.header-char{position:relative;width:42px;height:42px;flex-shrink:0}
+.char-ring{position:absolute;inset:-3px;transform:rotate(-90deg)}.char-ring circle{fill:none;stroke-width:3;stroke-linecap:round}.char-ring-bg{stroke:rgba(255,255,255,.06)}
+.char-ring-fill{stroke:var(--gold);stroke-dasharray:119.38;stroke-dashoffset:119.38;transition:stroke-dashoffset .5s var(--ease-out)}.char-ring-fill.maxed{stroke:var(--green);filter:drop-shadow(0 0 5px var(--green))}
+.char-icon{width:100%;height:100%;filter:drop-shadow(0 0 6px rgba(212,175,55,.35))}.char-glow{position:absolute;inset:-5px;border-radius:50%;background:radial-gradient(circle,rgba(212,175,55,.12),transparent 70%);opacity:0;transition:opacity .4s;pointer-events:none}
+.header-char.level-high .char-glow{opacity:1}.header-char.level-max .char-glow{opacity:1;background:radial-gradient(circle,rgba(0,230,118,.18),transparent 70%)}
+.char-level{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;color:var(--gold);background:rgba(212,175,55,.08);padding:2px 5px;border-radius:3px;letter-spacing:.1em;min-width:26px;text-align:center}
+.char-label{font-size:8px;opacity:.45;letter-spacing:.12em;text-transform:uppercase}
+
+/* NAME INPUT */
+.name-input-wrap{display:flex;flex-direction:column;align-items:center;gap:16px;width:100%;max-width:400px;animation:fade-in-up 1s 0.8s both;padding:0 15px}
+.name-input-wrap label{font-size:10px;letter-spacing:0.35em;opacity:0.6;text-transform:uppercase;font-weight:500}
+.name-input-wrap input{background:rgba(255,255,255,0.03);border:1px solid var(--border);color:white;font-family:'JetBrains Mono',monospace;font-size:clamp(15px,3.2vw,19px);font-weight:700;text-align:center;width:100%;padding:14px 18px;outline:none;letter-spacing:0.2em;text-transform:uppercase;transition:all 0.3s;border-radius:8px;backdrop-filter:var(--glass)}
+.name-input-wrap input:focus{border-color:var(--gold);box-shadow:0 0 25px rgba(212,175,55,0.18),inset 0 0 15px rgba(212,175,55,0.04);transform:scale(1.01)}
+.name-input-wrap input::placeholder{color:rgba(255,255,255,0.15)}
+
+.btn-primary{background:linear-gradient(135deg,rgba(212,175,55,0.22),rgba(212,175,55,0.04));border:1px solid var(--gold);color:var(--gold-light);font-family:'Inter',sans-serif;font-weight:600;font-size:clamp(10px,1.8vw,12px);letter-spacing:0.25em;padding:clamp(13px,2.8vw,16px) clamp(32px,6vw,46px);cursor:pointer;transition:all 0.3s;text-transform:uppercase;margin-top:4px;position:relative;overflow:hidden;border-radius:8px;backdrop-filter:var(--glass)}
+.btn-primary::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,var(--gold),var(--gold-dim));transform:translateX(-100%);transition:transform 0.35s var(--ease-out);z-index:-1}
+.btn-primary:hover{color:#000;box-shadow:0 0 35px rgba(212,175,55,0.35);transform:translateY(-2px) scale(1.01)}.btn-primary:hover::before{transform:translateX(0)}.btn-primary:active{transform:translateY(0) scale(0.98)}.btn-primary:disabled{opacity:0.15;cursor:not-allowed;transform:none;box-shadow:none}
+
+.live-count{margin-top:22px;font-size:10px;letter-spacing:0.25em;opacity:0.45;animation:fade-in-up 1s 1.2s both;display:flex;align-items:center;gap:7px}.live-count span:first-child{color:var(--green);animation:pulse-dot 2s infinite}
+@keyframes pulse-dot{0%,100%{opacity:1}50%{opacity:0.3}}
+.live-feed{margin-top:10px;font-size:10px;opacity:0.35;color:var(--text-muted);animation:fade-in-up 1s 1.6s both;max-width:430px;min-height:18px;padding:0 15px}.live-feed span{color:var(--green);font-weight:600}
+.floating-badge{position:fixed;padding:7px 12px;background:var(--surface);border:1px solid var(--border);border-radius:7px;font-size:10px;letter-spacing:0.08em;opacity:0;pointer-events:none;animation:float-badge 5.5s ease-in-out forwards;z-index:100;backdrop-filter:var(--glass);box-shadow:0 4px 18px rgba(0,0,0,0.35);text-transform:uppercase;font-weight:500}
+@keyframes float-badge{0%{opacity:0;transform:translateY(25px) scale(0.95)}8%{opacity:0.75;transform:translateY(0) scale(1)}80%{opacity:0.75;transform:translateY(-18px)}100%{opacity:0;transform:translateY(-35px)}}
+
+/* MODAL */
+.modal{position:fixed;inset:0;background:rgba(0,0,0,0.82);display:none;align-items:center;justify-content:center;z-index:2000;padding:18px;backdrop-filter:blur(7px)}
+.modal-content{background:var(--surface);border:1px solid var(--border);padding:30px;max-width:480px;width:100%;text-align:center;border-radius:14px;box-shadow:0 18px 55px rgba(0,0,0,0.45);animation:modal-in 0.35s var(--ease-elastic)}
+@keyframes modal-in{from{opacity:0;transform:scale(0.96) translateY(12px)}to{opacity:1;transform:scale(1) translateY(0)}}
+.modal-title{font-size:clamp(18px,4vw,24px);color:var(--gold-light);margin-bottom:10px;letter-spacing:0.04em;text-transform:uppercase;font-weight:700}
+.modal-text{font-size:13px;color:var(--text-dim);line-height:1.5;margin-bottom:12px}.modal-options{display:flex;flex-direction:column;gap:8px}
+.modal-option{background:rgba(255,255,255,0.03);border:1px solid var(--border);padding:12px;cursor:pointer;transition:all 0.3s var(--ease-out);text-align:left;border-radius:9px;font-size:12px;display:flex;align-items:center;gap:10px;font-weight:500}
+.modal-option:hover{border-color:var(--gold);background:rgba(212,175,55,0.07);transform:translateX(3px)}.modal-option.selected{border-color:var(--green);background:rgba(0,230,118,0.09);box-shadow:0 0 18px rgba(0,230,118,0.12)}
+
+/* LOADING */
+#loading{min-height:100vh;flex-direction:column;align-items:center;justify-content:center;gap:22px}
+.loading-logo{font-size:clamp(46px,11vw,75px);color:var(--gold);font-weight:800;letter-spacing:-0.04em;animation:flicker 0.12s infinite alternate}
+@keyframes flicker{0%{opacity:1;text-shadow:0 0 45px rgba(212,175,55,0.7)}100%{opacity:0.82;text-shadow:0 0 70px rgba(212,175,55,0.9)}}
+.loading-status{font-size:10px;letter-spacing:0.35em;opacity:0.45;text-transform:uppercase;min-height:18px;font-weight:500}
+.loading-bar-wrap{width:min(300px,82vw);height:3px;background:rgba(255,255,255,0.04);overflow:hidden;border-radius:2px}
+.loading-bar{height:100%;background:linear-gradient(90deg,var(--gold-dim),var(--gold),var(--gold-dim));width:0%;transition:width 0.08s linear;box-shadow:0 0 12px var(--gold);background-size:200% 100%;animation:loading-shine 1.4s linear infinite}
+@keyframes loading-shine{0%{background-position:200% 0}100%{background-position:-200% 0}}
+.loading-percent{font-family:'JetBrains Mono',monospace;font-size:clamp(25px,6.5vw,36px);font-weight:700;color:white;opacity:0.85}
+
+/* GAME */
+#game{min-height:100vh;flex-direction:column;padding:0}
+.game-header{border-bottom:1px solid var(--border);padding:10px 14px;display:flex;justify-content:space-between;align-items:center;background:var(--surface);position:sticky;top:0;z-index:100;backdrop-filter:var(--glass)}
+.header-left{display:flex;align-items:center;gap:10px}.header-logo{font-weight:800;font-size:clamp(16px,3vw,20px);color:var(--gold);border:1px solid var(--border);padding:4px 9px;border-radius:5px;letter-spacing:-0.02em}
+.player-name{font-family:'JetBrains Mono',monospace;font-size:clamp(10px,2vw,13px);font-weight:700;color:white;text-transform:uppercase;letter-spacing:0.04em}
+.player-title{font-size:8px;letter-spacing:0.25em;opacity:0.35;text-transform:uppercase;font-weight:500}
+.header-right{display:flex;align-items:center;gap:9px;font-size:10px;flex-wrap:wrap;justify-content:flex-end}
+.online-indicator{display:flex;align-items:center;gap:5px;letter-spacing:0.08em;opacity:0.65}.online-dot{width:5px;height:5px;background:var(--green);border-radius:50%;animation:blink 1.4s infinite;box-shadow:0 0 6px var(--green)}
+.streak-badge{display:flex;align-items:center;gap:4px;padding:4px 9px;background:rgba(0,230,118,0.08);border:1px solid rgba(0,230,118,0.25);border-radius:16px;font-size:9px;font-weight:600;letter-spacing:0.04em}
+.audio-toggle{cursor:pointer;opacity:0.45;transition:all 0.3s;font-size:15px;user-select:none;padding:3px}.audio-toggle:hover{opacity:1;transform:scale(1.12)}
+.game-body{display:grid;grid-template-columns:1fr 320px;gap:0;flex:1;min-height:calc(100vh - 52px)}
+
+/* LEFT */
+.left-panel{padding:18px;overflow-y:auto;border-right:1px solid var(--border)}
+.stats-bar{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:18px}
+.stat-item{background:var(--surface);border:1px solid var(--border);padding:10px 5px;text-align:center;position:relative;overflow:hidden;border-radius:9px;transition:all 0.3s var(--ease-out)}
+.stat-item:hover{border-color:var(--gold);transform:translateY(-2px);box-shadow:0 7px 22px rgba(0,0,0,0.25)}
+.stat-label{font-size:8px;letter-spacing:0.25em;opacity:0.35;margin-bottom:5px;text-transform:uppercase;font-weight:600}
+.stat-value{font-family:'JetBrains Mono',monospace;font-size:clamp(14px,2.8vw,20px);font-weight:700;color:white}
+.stat-max{font-size:8px;opacity:0.25;margin-top:1px}
+.progress-bar-wrap{height:3px;background:rgba(255,255,255,0.04);margin-top:7px;overflow:hidden;border-radius:2px}
+.progress-bar{height:100%;background:linear-gradient(90deg,var(--gold-dim),var(--gold));transition:width 0.8s var(--ease-out);box-shadow:0 0 8px rgba(212,175,55,0.35)}
+.progress-bar.maxed{background:linear-gradient(90deg,var(--green),#00ffaa);box-shadow:0 0 12px var(--green)}
+
+/* EDUCATIONAL BLOCK */
+.edu-block{background:rgba(255,255,255,0.02);border:1px solid var(--border);border-left:3px solid var(--blue);padding:14px;margin-bottom:16px;border-radius:9px}
+.edu-title{font-size:9px;letter-spacing:0.25em;color:var(--blue);opacity:0.8;margin-bottom:8px;text-transform:uppercase;font-weight:600;display:flex;align-items:center;gap:5px}.edu-title::before{content:'📖'}
+.edu-theory{font-size:12px;line-height:1.6;color:var(--text-dim);margin-bottom:8px}
+.edu-task{font-size:12px;line-height:1.5;color:var(--text);font-weight:500;background:rgba(0,180,216,0.06);padding:8px;border-radius:6px;margin-bottom:6px}
+.edu-tip{font-size:11px;color:var(--gold-light);font-style:italic;opacity:0.85}
+
+.day-header{display:flex;align-items:center;gap:10px;margin-bottom:16px;flex-wrap:wrap}
+.day-number{font-size:clamp(36px,8vw,54px);color:var(--gold);line-height:1;font-weight:800;letter-spacing:-0.02em;opacity:0.85}
+.day-info h2{font-size:clamp(16px,3.5vw,22px);color:white;letter-spacing:-0.01em;line-height:1.2;font-weight:700}
+.day-info .protocol-tag{font-size:8px;letter-spacing:0.15em;color:var(--gold);opacity:0.6;margin-top:3px;text-transform:uppercase;font-weight:600}
+.mission-box{background:var(--surface);border:1px solid var(--border);border-left:3px solid var(--gold);padding:14px;margin-bottom:14px;border-radius:9px}
+.mission-title{font-size:8px;letter-spacing:0.25em;color:var(--gold);opacity:0.65;margin-bottom:7px;text-transform:uppercase;font-weight:600;display:flex;align-items:center;gap:5px}.mission-title::before{content:'▸';color:var(--green)}
+.mission-text{font-size:12px;line-height:1.6;color:var(--text-dim)}
+.protocol-steps{display:flex;flex-direction:column;gap:7px;margin-bottom:14px}
+.step{display:flex;align-items:flex-start;gap:8px;padding:10px;border:1px solid transparent;cursor:pointer;transition:all 0.3s var(--ease-out);border-radius:7px;background:rgba(255,255,255,0.01)}
+.step:hover{border-color:var(--border);background:rgba(255,255,255,0.025);transform:translateX(2px)}.step.completed{border-color:rgba(0,230,118,0.25);background:rgba(0,230,118,0.04)}
+.step-highlight{border-left:3px solid var(--green);background:rgba(0,230,118,0.06)!important}
+.step-num{font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:700;color:var(--gold);opacity:0.35;min-width:26px;text-align:center}.step.completed .step-num{opacity:1;color:var(--green)}
+.step-content h4{font-size:10px;letter-spacing:0.08em;color:white;margin-bottom:2px;text-transform:uppercase;font-weight:600}
+.step-content p{font-size:11px;color:var(--text-muted);line-height:1.5}
+.step-check{margin-left:auto;width:18px;height:18px;border:1px solid #333;display:flex;align-items:center;justify-content:center;font-size:10px;flex-shrink:0;transition:all 0.3s;border-radius:50%}
+.step.completed .step-check{border-color:var(--green);color:var(--green);box-shadow:0 0 10px rgba(0,230,118,0.25);transform:scale(1.05)}
+.timeline{display:flex;flex-direction:column;gap:5px;margin-bottom:14px}
+.time-item{display:flex;align-items:center;gap:8px;padding:8px;border-left:2px solid rgba(255,255,255,0.04);transition:all 0.3s var(--ease-out);background:rgba(255,255,255,0.01);border-radius:0 5px 5px 0}
+.time-item.active{border-left-color:var(--gold);background:rgba(212,175,55,0.04)}
+.time-label{font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;color:var(--gold);min-width:50px}
+.time-action{font-size:10px;color:var(--text-dim)}.time-action strong{color:var(--text)}
+.bonus-box{background:linear-gradient(135deg,rgba(212,175,55,0.06),rgba(212,175,55,0.01));border:1px solid rgba(212,175,55,0.15);padding:12px;font-size:11px;color:var(--text-dim);line-height:1.6;margin-bottom:14px;border-radius:9px;position:relative;overflow:hidden}
+.bonus-box::before{content:'🎁';position:absolute;top:8px;right:10px;font-size:14px;opacity:0.15}.bonus-box strong{color:var(--gold-light)}
+.complete-btn{width:100%;background:linear-gradient(135deg,rgba(212,175,55,0.18),rgba(212,175,55,0.04));border:1px solid var(--gold);color:var(--gold-light);font-family:'Inter',sans-serif;font-size:10px;font-weight:600;letter-spacing:0.25em;padding:14px;cursor:pointer;transition:all 0.35s var(--ease-out);text-transform:uppercase;margin-top:6px;position:relative;overflow:hidden;border-radius:7px}
+.complete-btn::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,var(--gold),var(--gold-dim));transform:translateX(-100%);transition:transform 0.35s var(--ease-out);z-index:-1}
+.complete-btn:hover:not(:disabled){color:#000;box-shadow:0 0 35px rgba(212,175,55,0.35);transform:translateY(-2px)}.complete-btn:hover:not(:disabled)::before{transform:translateX(0)}.complete-btn:disabled{opacity:0.15;cursor:not-allowed}
+
+/* ASSISTANT */
+.assistant-toggle{position:fixed;bottom:75px;right:15px;width:42px;height:42px;background:var(--surface);border:1px solid var(--border);border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;z-index:150;box-shadow:0 4px 15px rgba(0,0,0,0.3);transition:all 0.3s}.assistant-toggle:hover{border-color:var(--gold);transform:scale(1.05)}
+.assistant-modal{position:fixed;inset:0;background:rgba(0,0,0,0.75);display:none;align-items:center;justify-content:center;z-index:2000;padding:16px;backdrop-filter:blur(6px)}.assistant-modal.active{display:flex}
+.assistant-content{background:var(--surface-solid);border:1px solid var(--border);padding:24px;max-width:440px;width:100%;border-radius:12px;box-shadow:0 15px 45px rgba(0,0,0,0.4);animation:modal-in 0.3s var(--ease-elastic)}
+.assistant-title{font-size:14px;color:var(--gold-light);margin-bottom:10px;font-weight:700;display:flex;align-items:center;gap:6px}
+.assistant-msg{font-size:12px;line-height:1.6;color:var(--text-dim);margin-bottom:14px;white-space:pre-line}
+.assistant-btn{background:rgba(212,175,55,0.15);border:1px solid var(--gold);color:var(--gold-light);padding:8px 14px;border-radius:6px;cursor:pointer;font-size:10px;letter-spacing:0.15em;text-transform:uppercase;transition:all 0.3s}.assistant-btn:hover{background:var(--gold);color:#000}
+
+/* MAP */
+.map-section{margin-bottom:14px}.map-btn{background:rgba(255,255,255,0.03);border:1px solid var(--border);color:var(--text-dim);font-family:'Inter',sans-serif;font-size:9px;letter-spacing:0.15em;padding:7px 12px;cursor:pointer;transition:all 0.3s var(--ease-out);margin-bottom:10px;border-radius:5px;text-transform:uppercase;font-weight:500}
+.map-btn:hover{border-color:var(--gold);color:var(--gold);background:rgba(212,175,55,0.07)}
+.phase-map{display:flex;flex-direction:column;gap:4px;margin-bottom:10px}
+.phase-label{font-size:8px;letter-spacing:0.35em;opacity:0.35;margin-bottom:5px;text-transform:uppercase;padding:6px 0 3px;border-bottom:1px solid var(--border);font-weight:600}
+.day-pill{display:inline-flex;align-items:center;gap:4px;padding:5px 9px;border:1px solid transparent;cursor:pointer;transition:all 0.3s var(--ease-out);font-size:9px;letter-spacing:0.04em;margin:2px;border-radius:4px;font-weight:500}
+.day-pill.done{border-color:rgba(0,230,118,0.25);color:var(--green);background:rgba(0,230,118,0.04)}
+.day-pill.current{border-color:var(--gold);color:var(--gold);background:rgba(212,175,55,0.08);box-shadow:0 0 10px rgba(212,175,55,0.15)}
+.day-pill.locked{opacity:0.15;cursor:default}.day-pill.unlocked{border-color:rgba(255,255,255,0.08);color:var(--text-dim)}
+.day-pill:not(.locked):hover{border-color:var(--gold);color:var(--gold);transform:scale(1.02)}.days-grid{display:flex;flex-wrap:wrap;gap:2px}
+
+/* RIGHT */
+.right-panel{background:var(--surface-solid);display:flex;flex-direction:column;overflow:hidden;border-left:1px solid var(--border)}
+.right-section{border-bottom:1px solid var(--border);padding:12px;max-height:260px;overflow:hidden}
+.section-title{font-size:8px;letter-spacing:0.35em;opacity:0.35;text-transform:uppercase;margin-bottom:8px;display:flex;align-items:center;gap:6px;font-weight:600}.section-title::after{content:'';flex:1;height:1px;background:var(--border)}
+.activity-feed{display:flex;flex-direction:column;gap:0}
+.activity-item{display:flex;align-items:flex-start;gap:7px;padding:7px 0;border-bottom:1px solid rgba(255,255,255,0.02);animation:slide-in-right 0.35s var(--ease-out) both;position:relative}
+.activity-item::before{content:'';position:absolute;left:0;top:0;bottom:0;width:2px;background:transparent;transition:background 0.3s;border-radius:2px}.activity-item.highlight::before{background:var(--green)}
+@keyframes slide-in-right{from{opacity:0;transform:translateX(25px)}to{opacity:1;transform:translateX(0)}}
+.activity-avatar{width:24px;height:24px;background:rgba(212,175,55,0.08);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:8px;font-weight:600;flex-shrink:0;border-radius:4px}
+.activity-content{flex:1;min-width:0}.activity-name{font-size:9px;color:white;font-weight:600;text-transform:uppercase;letter-spacing:0.04em}
+.activity-action{font-size:8px;color:var(--text-muted);margin-top:2px}.activity-action strong{color:var(--gold)}
+.activity-time{font-size:7px;color:var(--text-muted);margin-top:2px;opacity:0.5}
+.lb-section{flex:1;display:flex;flex-direction:column;min-height:0}.lb-list{overflow-y:auto;flex:1;max-height:220px}
+.lb-item{display:flex;align-items:center;gap:7px;padding:5px 0;border-bottom:1px solid rgba(255,255,255,0.02);transition:all 0.3s var(--ease-out)}
+.lb-item:hover{background:rgba(255,255,255,0.015);padding-left:3px}
+.lb-rank{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;min-width:18px;opacity:0.45}.lb-rank.top{opacity:1;color:var(--gold)}
+.lb-avatar{width:22px;height:22px;background:rgba(212,175,55,0.08);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:7px;font-weight:600;flex-shrink:0;border-radius:4px}
+.lb-info{flex:1;min-width:0}.lb-name{font-size:9px;color:white;font-weight:600;text-transform:uppercase;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;letter-spacing:0.04em}
+.lb-day{font-size:7px;opacity:0.35;letter-spacing:0.1em}
+.lb-score{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;color:var(--gold);text-align:right}
+.lb-you{border:1px solid rgba(212,175,55,0.25);background:rgba(212,175,55,0.06);padding:2px 4px;border-radius:3px}
+.schedule-item{display:flex;justify-content:space-between;padding:5px 0;border-bottom:1px solid rgba(255,255,255,0.02);font-size:9px;transition:all 0.3s}
+.schedule-item:hover{background:rgba(255,255,255,0.015);padding-left:3px}
+.schedule-time{color:var(--gold);font-family:'JetBrains Mono',monospace;font-size:8px;font-weight:600}
+.schedule-action{color:var(--text-muted);text-transform:uppercase;letter-spacing:0.04em;font-size:7px}
+.right-stats{padding:12px}.right-stats .sr{display:flex;justify-content:space-between;padding:4px 0;font-size:9px;opacity:0.6;transition:all 0.3s}
+.right-stats .sr:hover{opacity:1;padding-left:3px}.right-stats .sr span:last-child{color:white;font-weight:600}.right-stats .sr span.gs{color:var(--gold)}
+.progress-bar-wrap.sm{height:2px;margin-top:4px}
+
+/* REWARD */
+#reward{min-height:100vh;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:22px;overflow:hidden;position:relative}
+.reward-day{font-size:clamp(55px,14vw,110px);color:var(--gold);line-height:1;margin-bottom:4px;animation:reward-day-in 0.65s var(--ease-elastic) both;font-weight:800;letter-spacing:-0.03em;text-shadow:0 0 55px rgba(212,175,55,0.45)}
+@keyframes reward-day-in{from{transform:scale(0.3) rotate(-7deg);opacity:0}to{transform:scale(1) rotate(0deg);opacity:1}}
+.reward-title{font-size:clamp(16px,4vw,28px);color:white;letter-spacing:-0.01em;margin-bottom:18px;animation:fade-in-up 0.45s 0.25s both;text-transform:uppercase;font-weight:700}
+.reward-stats{display:flex;gap:clamp(10px,2.5vw,25px);justify-content:center;margin:12px 0 22px;flex-wrap:wrap}
+.reward-stat{text-align:center;animation:stat-pop 0.45s var(--ease-elastic) both;position:relative}
+.reward-stat:nth-child(1){animation-delay:0.4s}.reward-stat:nth-child(2){animation-delay:0.5s}
+.reward-stat:nth-child(3){animation-delay:0.6s}.reward-stat:nth-child(4){animation-delay:0.7s}
+@keyframes stat-pop{from{transform:scale(0);opacity:0}to{transform:scale(1);opacity:1}}
+.reward-stat-val{font-family:'JetBrains Mono',monospace;font-size:clamp(20px,4.5vw,32px);font-weight:700;color:var(--green);display:block;text-shadow:0 0 20px rgba(0,230,118,0.4);animation:value-glow 0.8s 0.4s both}
+@keyframes value-glow{0%{filter:brightness(1.4)}100%{filter:brightness(1)}}
+.reward-stat-label{font-size:7px;letter-spacing:0.25em;opacity:0.45;margin-top:4px;text-transform:uppercase;font-weight:500}
+.command-input-wrap{margin:18px 0;display:flex;flex-direction:column;align-items:center;gap:10px;animation:fade-in-up 0.45s 0.9s both}
+.command-label{font-size:8px;letter-spacing:0.25em;opacity:0.45;text-transform:uppercase;font-weight:500}
+.command-input{background:rgba(255,255,255,0.03);border:1px solid var(--border);color:white;font-family:'JetBrains Mono',monospace;font-size:clamp(13px,2.8vw,16px);font-weight:700;text-align:center;padding:11px 18px;outline:none;letter-spacing:0.15em;text-transform:uppercase;width:min(280px,88vw);transition:all 0.3s;border-radius:7px}
+.command-input:focus{border-color:var(--green);box-shadow:0 0 22px rgba(0,230,118,0.18)}.command-input::placeholder{color:rgba(255,255,255,0.12)}
+.reward-ring{position:fixed;width:460px;height:460px;border:1px solid rgba(212,175,55,0.08);border-radius:50%;top:50%;left:50%;transform:translate(-50%,-50%);animation:ring-expand 2.8s ease-out infinite;pointer-events:none}
+.reward-ring:nth-child(2){animation-delay:0.9s}.reward-ring:nth-child(3){animation-delay:1.8s}
+@keyframes ring-expand{0%{transform:translate(-50%,-50%) scale(0.18);opacity:0.65}100%{transform:translate(-50%,-50%) scale(2.1);opacity:0}}
+
+/* ACHIEVEMENT & TOAST */
+.achievement{position:fixed;top:65px;right:12px;background:var(--surface);border:1px solid var(--border);border-left:3px solid var(--gold);padding:14px 18px;z-index:1000;transform:translateX(120%);transition:transform 0.45s var(--ease-out);max-width:280px;box-shadow:0 9px 35px rgba(0,0,0,0.35);border-radius:9px;backdrop-filter:var(--glass)}
+.achievement.show{transform:translateX(0);animation:ach-shake 0.35s}
+@keyframes ach-shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-3px)}75%{transform:translateX(3px)}}
+.achievement-label{font-size:7px;letter-spacing:0.35em;opacity:0.45;margin-bottom:4px;text-transform:uppercase;display:flex;align-items:center;gap:5px;font-weight:600}
+.achievement-title{font-size:13px;color:white;font-weight:700;text-transform:uppercase;letter-spacing:0.04em}
+.achievement-desc{font-size:10px;color:var(--text-dim);margin-top:4px;line-height:1.4}
+.toast{position:fixed;bottom:60px;right:12px;background:var(--surface);border:1px solid var(--green);padding:9px 14px;z-index:1000;transform:translateY(75px);transition:transform 0.35s var(--ease-out);max-width:260px;font-size:10px;border-radius:7px;box-shadow:0 4px 22px rgba(0,0,0,0.25);backdrop-filter:var(--glass)}
+.toast.show{transform:translateY(0)}.toast-text{color:white;font-weight:500}
+
+/* PROGRESS BANNER */
+.progress-banner{position:fixed;bottom:0;left:0;right:0;background:var(--surface-solid);border-top:1px solid var(--border);padding:7px 14px;display:flex;justify-content:space-between;align-items:center;font-size:9px;z-index:150;backdrop-filter:var(--glass)}
+.progress-banner .bar{flex:1;height:3px;background:rgba(255,255,255,0.04);margin:0 10px;overflow:hidden;border-radius:2px}
+.progress-banner .fill{height:100%;background:linear-gradient(90deg,var(--green),#00ffaa);transition:width 0.4s var(--ease-out);box-shadow:0 0 8px var(--green)}
+.progress-banner span{font-weight:600;letter-spacing:0.12em;text-transform:uppercase;opacity:0.6}
+
+/* PARTICLES */
+.particle{position:fixed;width:4px;height:4px;background:var(--gold);border-radius:50%;pointer-events:none;animation:particle-fly 1.1s ease-out forwards;box-shadow:0 0 6px var(--gold)}
+@keyframes particle-fly{0%{transform:translate(0,0) scale(1);opacity:1}100%{transform:translate(var(--tx),var(--ty)) scale(0);opacity:0}}
+
+/* VERIFICATION GATE */
+.verification-modal{position:fixed;inset:0;background:rgba(0,0,0,0.82);display:none;align-items:center;justify-content:center;z-index:3000;padding:18px;backdrop-filter:blur(7px)}
+.verification-modal.active{display:flex}
+.verification-content{background:var(--surface);border:1px solid var(--border);padding:28px;max-width:540px;width:100%;animation:slide-up 0.35s var(--ease-out);border-radius:14px;box-shadow:0 18px 55px rgba(0,0,0,0.45);backdrop-filter:var(--glass)}
+@keyframes slide-up{from{opacity:0;transform:translateY(35px) scale(0.97)}to{opacity:1;transform:translateY(0) scale(1)}}
+.verification-title{font-size:clamp(16px,3.5vw,22px);color:var(--gold-light);margin-bottom:8px;letter-spacing:0.04em;text-transform:uppercase;font-weight:700;text-align:center}
+.verification-desc{font-size:12px;color:var(--text-dim);line-height:1.5;margin-bottom:14px;text-align:center}
+.verification-checks{display:flex;flex-direction:column;gap:7px;margin:14px 0;padding:14px;background:rgba(255,255,255,0.02);border:1px solid var(--border);border-radius:9px}
+.v-check{display:flex;align-items:center;gap:7px;font-size:11px;color:var(--text-dim);padding:5px;border-radius:4px;transition:all 0.3s}
+.v-check::before{content:'○';font-size:13px;color:var(--gold);font-weight:bold}.v-check.done::before{content:'✓';color:var(--green)}
+.v-cta{display:block;background:rgba(0,230,118,0.08);border:1px solid var(--green);color:var(--green);padding:12px;text-align:center;font-size:10px;letter-spacing:0.25em;text-transform:uppercase;cursor:pointer;transition:all 0.3s var(--ease-out);margin:14px 0;text-decoration:none;border-radius:7px;font-weight:600}
+.v-cta:hover{background:var(--green);color:#000;box-shadow:0 0 25px rgba(0,230,118,0.25);transform:translateY(-2px)}
+.v-confirm{display:flex;align-items:center;gap:7px;margin:14px 0;font-size:10px;justify-content:center}
+.v-confirm input[type="checkbox"]{width:15px;height:15px;accent-color:var(--gold);cursor:pointer}
+.v-submit{width:100%;background:linear-gradient(135deg,var(--gold),var(--gold-dim));color:#000;border:none;padding:13px;font-size:10px;font-weight:700;letter-spacing:0.35em;text-transform:uppercase;cursor:pointer;opacity:0.25;transition:all 0.3s var(--ease-out);border-radius:7px}
+.v-submit.active{opacity:1;box-shadow:0 0 25px rgba(212,175,55,0.25);transform:translateY(-2px)}
+.v-submit.active:hover{transform:translateY(-3px);box-shadow:0 0 40px rgba(212,175,55,0.4)}
+
+/* MOBILE */
+@media(max-width:880px){
+  .game-body{grid-template-columns:1fr}
+  .right-panel{display:none}
+  .stats-bar{grid-template-columns:repeat(2,1fr)}
+  .left-panel{padding:12px}
+  .progress-banner{flex-direction:column;gap:5px;padding:7px 10px}
+  .progress-banner .bar{margin:4px 0;width:100%}
+  .day-header{flex-direction:column;align-items:flex-start}
+  .header-right{gap:6px;font-size:9px}
+  .streak-badge{display:none}
+  .header-char-wrap{gap:5px}
+  .char-level{font-size:8px;padding:2px 4px}
+}
+::-webkit-scrollbar{width:3px}::-webkit-scrollbar-thumb{background:var(--gold-dim);border-radius:2px}::-webkit-scrollbar-track{background:transparent}
+</style>
+</head>
+<body>
+<canvas id="bg-canvas"></canvas>
+
+<!-- INTRO -->
+<div id="intro" class="screen active">
+  <div class="glitch-wrap"><div class="glitch" data-text="QUIET WEALTH">QUIET WEALTH</div></div>
+  <div class="logo-sub">THE ARCHITECT'S PROTOCOL</div>
+  <p class="tagline">"90% of people are <span>Financial Noise.</span><br>Today, you start your journey toward Silence.<br>30 days. No excuses. Only systems."</p>
+  
+  <!-- 🔐 SECURE CORE -->
+  <div class="secure-core" id="secure-core">
+    <div class="core-ring"></div><div class="core-ring"></div><div class="core-ring"></div>
+    <div class="core-pulse"></div>
+  </div>
+
+  <div class="name-input-wrap">
+    <label>◈ IDENTIFY YOURSELF — ARCHITECT</label>
+    <input type="text" id="name-input" placeholder="YOUR NAME" maxlength="20" autocomplete="off">
+    <button class="btn-primary" id="init-btn" onclick="initProtocol()">⚡ INITIATE PROTOCOL</button>
+  </div>
+  <div class="live-count"><span>●</span> <span id="live-num">247</span> ARCHITECTS ACTIVE GLOBALLY</div>
+  <div class="live-feed" id="intro-live-feed"></div>
+  <div style="margin-top:10px;font-size:8px;opacity:0.35">🇺 🇨 🇧 Protocol optimized</div>
+</div>
+
+<!-- ONBOARDING -->
+<div id="onboarding" class="modal">
+  <div class="modal-content">
+    <div class="modal-title">◈ SELECT YOUR ARCHETYPE</div>
+    <p class="modal-text">Choose your visual identity. Progress will be tracked around it.</p>
+    <div class="char-select-grid">
+      <div class="char-card" data-char="male" onclick="selectChar('male')">
+        <div class="char-preview"><svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="mGrad" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#d4af37"/><stop offset="100%" stop-color="#8a6e1a"/></linearGradient></defs><circle cx="50" cy="45" r="22" fill="#0a0a0f" stroke="url(#mGrad)" stroke-width="2"/><path d="M38,55 Q50,75 62,55 L62,85 L38,85Z" fill="#0a0a0f" stroke="url(#mGrad)" stroke-width="2"/><rect x="42" y="60" width="16" height="12" rx="2" fill="none" stroke="#d4af37" stroke-width="1.5"/><circle cx="44" cy="42" r="3" fill="#d4af37"/><circle cx="56" cy="42" r="3" fill="#d4af37"/><path d="M44,48 Q50,52 56,48" fill="none" stroke="#d4af37" stroke-width="1.5"/></svg></div>
+        <div class="char-name">ARCHITECT</div><div class="char-role">MALE</div>
+      </div>
+      <div class="char-card" data-char="female" onclick="selectChar('female')">
+        <div class="char-preview"><svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="fGrad" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#d4af37"/><stop offset="100%" stop-color="#8a6e1a"/></linearGradient></defs><circle cx="50" cy="45" r="22" fill="#0a0a0f" stroke="url(#fGrad)" stroke-width="2"/><path d="M38,55 Q50,70 62,55 L62,85 L38,85Z" fill="#0a0a0f" stroke="url(#fGrad)" stroke-width="2"/><path d="M40,35 Q35,25 45,30 M60,35 Q65,25 55,30" fill="none" stroke="#d4af37" stroke-width="1.5"/><circle cx="44" cy="42" r="3" fill="#d4af37"/><circle cx="56" cy="42" r="3" fill="#d4af37"/><path d="M45,48 Q50,51 55,48" fill="none" stroke="#d4af37" stroke-width="1.5"/></svg></div>
+        <div class="char-name">ARCHITECT</div><div class="char-role">FEMALE</div>
+      </div>
+    </div>
+    <div style="margin-top:10px;border-top:1px solid var(--border);padding-top:10px">
+      <div class="modal-title" style="font-size:14px;margin-bottom:5px">◈ REGION</div>
+      <div class="modal-options" style="flex-direction:row;flex-wrap:wrap;justify-content:center;gap:7px">
+        <div class="modal-option" data-region="US" onclick="selectRegion('US')" style="padding:9px 12px;font-size:10px">🇺🇸 USA</div>
+        <div class="modal-option" data-region="CA" onclick="selectRegion('CA')" style="padding:9px 12px;font-size:10px">🇨🇦 CANADA</div>
+        <div class="modal-option" data-region="GB" onclick="selectRegion('GB')" style="padding:9px 12px;font-size:10px">🇬🇧 UK</div>
+      </div>
+    </div>
+    <button class="btn-primary" id="confirm-char-btn" onclick="confirmCharSelection()" disabled style="margin-top:12px;width:100%">⚡ CONFIRM & LAUNCH</button>
+  </div>
+</div>
+
+<!-- LOADING -->
+<div id="loading" class="screen">
+  <div class="loading-logo">QW</div>
+  <div class="loading-percent" id="load-pct">0%</div>
+  <div class="loading-bar-wrap"><div class="loading-bar" id="load-bar"></div></div>
+  <div class="loading-status" id="load-status">ESTABLISHING SOVEREIGNTY...</div>
+</div>
+
+<!-- GAME -->
+<div id="game" class="screen">
+  <header class="game-header">
+    <div class="header-left">
+      <div class="header-logo">QW</div>
+      <div><div class="player-title">ARCHITECT UNIT</div><div class="player-name" id="hdr-name">---</div></div>
+      <div class="header-char-wrap">
+        <div class="header-char" id="header-char">
+          <div class="char-glow"></div>
+          <svg class="char-ring" viewBox="0 0 46 46"><circle class="char-ring-bg" cx="23" cy="23" r="19"/><circle class="char-ring-fill" id="char-ring-fill" cx="23" cy="23" r="19"/></svg>
+          <div class="char-icon" id="char-icon"></div>
+        </div>
+        <div><div class="char-level" id="char-level">LV.1</div><div class="char-label">DAY <span id="char-day">1</span>/30</div></div>
+      </div>
+    </div>
+    <div class="header-right">
+      <div class="streak-badge" id="streak-badge">🔥 <span id="streak-count">0</span> DAY STREAK</div>
+      <div class="online-indicator"><div class="online-dot"></div><span id="online-count">247</span> ONLINE</div>
+      <div class="audio-toggle" onclick="toggleAudio()">🔊</div>
+    </div>
+  </header>
+  <div class="game-body">
+    <div class="left-panel">
+      <div class="stats-bar">
+        <div class="stat-item"><div class="stat-label">💰 CAPITAL</div><div class="stat-value" id="val-capital">0</div><div class="stat-max">/100</div><div class="progress-bar-wrap"><div class="progress-bar" id="bar-capital" style="width:0%"></div></div></div>
+        <div class="stat-item"><div class="stat-label">🧠 FOCUS</div><div class="stat-value" id="val-focus">0</div><div class="stat-max">/100</div><div class="progress-bar-wrap"><div class="progress-bar" id="bar-focus" style="width:0%"></div></div></div>
+        <div class="stat-item"><div class="stat-label">💪 VITALITY</div><div class="stat-value" id="val-vitality">0</div><div class="stat-max">/100</div><div class="progress-bar-wrap"><div class="progress-bar" id="bar-vitality" style="width:0%"></div></div></div>
+        <div class="stat-item"><div class="stat-label">🔒 SOVEREIGNTY</div><div class="stat-value" id="val-sovereignty">0</div><div class="stat-max">/100</div><div class="progress-bar-wrap"><div class="progress-bar" id="bar-sovereignty" style="width:0%"></div></div></div>
+      </div>
+      <div class="map-section" id="map-section" style="display:none"><button class="map-btn" onclick="closeMap()">← BACK</button><div id="map-container"></div></div>
+      <div id="day-view">
+        <button class="map-btn" onclick="openMap()">🗺 VIEW ALL 30 DAYS</button>
+        <div class="day-header"><div class="day-number" id="day-num">01</div><div class="day-info"><div class="protocol-tag" id="day-protocol">QUIET MONEY PROTOCOL</div><h2 id="day-title">THE SILENT AUDIT</h2></div></div>
+        
+        <!-- EDUCATIONAL BLOCK -->
+        <div class="edu-block">
+          <div class="edu-title">📖 THEORY & TASK</div>
+          <div class="edu-theory" id="edu-theory">Loading...</div>
+          <div class="edu-task" id="edu-task"></div>
+          <div class="edu-tip" id="edu-tip"></div>
+        </div>
+
+        <div class="mission-box"><div class="mission-title">▸ MISSION BRIEF</div><div class="mission-text" id="mission-text">Loading...</div></div>
+        <div class="protocol-steps" id="steps-container"></div>
+        <div class="timeline" id="timeline-container"></div>
+        <div class="bonus-box" id="bonus-box"></div>
+        <button class="complete-btn" id="complete-btn" onclick="completeDay()" disabled>⚡ EXECUTE & ADVANCE</button>
+      </div>
+    </div>
+    <div class="right-panel">
+      <div class="right-section"><div class="section-title">📡 LIVE FEED</div><div class="activity-feed" id="activity-feed"></div></div>
+      <div class="right-section lb-section"><div class="section-title">🏆 LEADERBOARD</div><div class="lb-list" id="leaderboard"></div></div>
+      <div class="right-section">
+        <div class="section-title">⏰ DAILY SYSTEM</div>
+        <div class="schedule-item"><span class="schedule-time" id="time-08">08:00</span><span class="schedule-action">Seed Check</span></div>
+        <div class="schedule-item"><span class="schedule-time" id="time-12">12:00</span><span class="schedule-action">Noise Filter</span></div>
+        <div class="schedule-item"><span class="schedule-time" id="time-20">20:00</span><span class="schedule-action">Sunset Audit</span></div>
+      </div>
+      <div class="right-stats">
+        <div class="section-title">📊 PROGRESS</div>
+        <div class="sr"><span>Day</span><span id="prog-day">1/30</span></div>
+        <div class="sr"><span>Score</span><span class="gs" id="prog-score">0</span></div>
+        <div class="sr"><span>Rank</span><span id="prog-rank">#---</span></div>
+        <div class="progress-bar-wrap sm"><div class="progress-bar" id="overall-progress" style="width:0%"></div></div>
+      </div>
+    </div>
+  </div>
+  <div class="progress-banner"><span>PROGRESS</span><div class="bar"><div class="fill" id="banner-progress" style="width:0%"></div></div><span id="banner-day">Day 1/30</span></div>
+</div>
+
+<!-- REWARD -->
+<div id="reward" class="screen">
+  <div class="reward-ring"></div><div class="reward-ring"></div><div class="reward-ring"></div>
+  <div class="reward-day" id="reward-day-num">01</div>
+  <div class="reward-title" id="reward-title">MISSION COMPLETE</div>
+  <div class="reward-stats">
+    <div class="reward-stat"><span class="reward-stat-val" id="rwd-capital">+0</span><div class="reward-stat-label">CAPITAL</div></div>
+    <div class="reward-stat"><span class="reward-stat-val" id="rwd-focus">+0</span><div class="reward-stat-label">FOCUS</div></div>
+    <div class="reward-stat"><span class="reward-stat-val" id="rwd-vitality">+0</span><div class="reward-stat-label">VITALITY</div></div>
+    <div class="reward-stat"><span class="reward-stat-val" id="rwd-sov">+0</span><div class="reward-stat-label">SOVEREIGNTY</div></div>
+  </div>
+  <div class="command-input-wrap">
+    <div class="command-label">ENTER COMMAND WORD</div>
+    <input type="text" class="command-input" id="command-input" placeholder="TYPE...">
+    <button class="btn-primary" onclick="confirmCommand()">✓ CONFIRM</button>
+  </div>
+  <div style="font-size:9px;opacity:0.35;letter-spacing:0.25em;margin-top:10px;" id="reward-hint"></div>
+</div>
+
+<!-- VERIFICATION GATE -->
+<div class="verification-modal" id="verification-modal">
+  <div class="verification-content">
+    <div class="verification-title" id="vg-title">◈ VERIFICATION</div>
+    <div class="verification-desc" id="vg-desc"></div>
+    <div class="verification-checks" id="vg-checks"></div>
+    <a href="#" class="v-cta" id="vg-cta" target="_blank" rel="noopener">🔗 GET TOOL</a>
+    <div class="v-confirm"><input type="checkbox" id="vg-confirm"><label for="vg-confirm">I confirm this is set up</label></div>
+    <button class="v-submit" id="vg-submit" disabled>⚡ VERIFY & CONTINUE</button>
+  </div>
+</div>
+
+<!-- ASSISTANT -->
+<div class="assistant-toggle" onclick="toggleAssistant()" title="Need Help?">💡</div>
+<div class="assistant-modal" id="assistant-modal">
+  <div class="assistant-content">
+    <div class="assistant-title">🛡 ARCHITECT'S MENTOR</div>
+    <div class="assistant-msg" id="assistant-msg">I'm here to guide you through the protocol. What's blocking you today?</div>
+    <button class="assistant-btn" onclick="toggleAssistant()">CLOSE</button>
+  </div>
+</div>
+
+<div class="achievement" id="achievement"><div class="achievement-label">⚡ UNLOCKED</div><div class="achievement-title" id="ach-title">FIRST MOVE</div><div class="achievement-desc" id="ach-desc">Day 1 complete.</div></div>
+<div class="toast" id="toast"><div class="toast-text" id="toast-text">Keep going!</div></div>
+
+<script>
+// ==================== CONFIG ====================
+const LOCALE_CONFIG = {US:{currency:'$',pension:'401(k)/Roth IRA'},CA:{currency:'C$',pension:'TFSA/RRSP'},GB:{currency:'£',pension:'ISA/SIPP'}};
+// 🔴 ВАЖНО: Вставь сюда свои реальные реферальные ссылки из Impact/CJ/Affiliate сетей
+const AFFILIATE_LINKS = {
+  nordvpn: "https://nordvpn.sjv.io/9VezoE", // День 5
+  dataRemoval: "https://goto.mydataremoval.com/n4R3jA", // День 16
+  nexo: "https://nexo.sjv.io/YV1PNP" // День 22
+};
+
+// ==================== DAYS DATA (EDUCATIONAL + OFFERS) ====================
+const DAYS = [
+  {day:1,title:"THE SILENT AUDIT",theory:"Money leaks aren't just subscriptions. They're micro-decisions: coffee, convenience fees, impulse scrolling. Visibility is the first step to control.",task:"Open your bank app. Export last 90 days. Categorize every expense into: Survival, Growth, or Noise.",tip:"Use the 3-category rule. If it doesn't keep you alive, make you better, or buy you time, it's Noise.",mission:"Find exactly where your money is bleeding.",steps:[{name:"Export bank statements",desc:"Last 90 days. Hard numbers only."},{name:"Categorize expenses",desc:"Base Survival vs Time-Buying vs Noise."},{name:"Calculate monthly leaks",desc:"Sum the Noise. Face the number."}],timeline:[{time:"08:00",action:"Export statements"},{time:"12:00",action:"Categorize expenses"},{time:"20:00",action:"Calculate total leaks"}],bonus:"🎁 <strong>THE BONUS:</strong> Financial Sobriety. The fog clears.",command:"EXECUTED",rewards:{capital:15,focus:5,vitality:0,sovereignty:10},achievement:{title:"FIRST MOVE",desc:"The audit begins."},assistantHint:"Start with your bank app's monthly export. Don't judge the numbers yet. Just label them: Survival (rent, food), Growth (skills, health), Noise (everything else)."},
+  {day:2,title:"THE $50 RULE",theory:"Impulse buying exploits dopamine. A 24-hour delay breaks the cycle. Most 'urgent' purchases vanish when you stop.",task:"Set a rule: Any non-survival purchase over $50 waits 24h. Write it down.",tip:"The question isn't 'Can I afford this?' It's 'Does this buy freedom or add noise?'",mission:"Install the first barrier against impulse.",steps:[{name:"24-hour buffer",desc:"Any non-survival purchase over $50 waits 24h."},{name:"Friction logic",desc:"Write it down. Close tab. Walk away."},{name:"Sovereign question",desc:"Does this buy freedom or add noise?"}],timeline:[{time:"08:00",action:"Capital moves first"},{time:"12:00",action:"Impulse check"},{time:"20:00",action:"Audit impulses killed"}],bonus:"🎁 <strong>THE BONUS:</strong> By tomorrow, 80% of urgent desires vanish.",command:"EXECUTED",rewards:{capital:10,focus:15,vitality:0,sovereignty:10},achievement:{title:"IMPULSE KILLER",desc:"The $50 barrier is active."},assistantHint:"Create a literal note on your phone: '$50 Rule: 24h delay.' Put it as your lock screen wallpaper for 3 days."},
+  {day:3,title:"SUBSCRIPTION EXECUTION",theory:"Recurring payments are silent vampires. They don't ask for permission. They just take. Most are unused after month 2.",task:"List every recurring payment. Cancel anything that doesn't directly build Time, Health, or Skill.",tip:"Check your bank statement for 'recurring' or 'auto-renew'. Delete payment methods, not just apps.",mission:"Kill the parasites stealing your freedom.",steps:[{name:"The Death List",desc:"Find every recurring payment in your bank app."},{name:"The Execution",desc:"Delete subscriptions that don't buy Time, Health, or Skill."},{name:"Redirection",desc:"Note total saved. Redirect to Core."}],timeline:[{time:"08:00",action:"Capital first"},{time:"12:00",action:"Build Death List"},{time:"20:00",action:"Move savings to Core"}],bonus:"🎁 <strong>THE BONUS:</strong> Financial Clarity. You owe nothing to digital vampires.",command:"EXECUTED",rewards:{capital:20,focus:5,vitality:0,sovereignty:15},achievement:{title:"PARASITE SLAYER",desc:"Digital vampires dead."},assistantHint:"Go to your payment provider (PayPal, Apple, Google Play). Cancel from there. Services rarely send reminders."},
+  {day:4,title:"LIFESTYLE FREEZE",theory:"When income rises, spending rises. This is 'lifestyle inflation'. It's the #1 reason earners don't accumulate wealth.",task:"Define your absolute minimum monthly cost. Lock it. Any extra income goes to your fortress, not your cart.",tip:"The gap between income and spending is freedom. Widen it deliberately.",mission:"Lock your base. Build the moat.",steps:[{name:"Base calculation",desc:"Define absolute minimum cost of living."},{name:"Freeze declaration",desc:"Lock spending at base. Income doubles? Spending stays."},{name:"The moat",desc:"Every dollar above base goes to fortress."}],timeline:[{time:"08:00",action:"Define base cost"},{time:"12:00",action:"Write Freeze contract"},{time:"20:00",action:"Deploy surplus"}],bonus:"🎁 <strong>THE BONUS:</strong> The Freeze creates an expanding wealth gap.",command:"FROZEN",rewards:{capital:15,focus:10,vitality:0,sovereignty:20},achievement:{title:"FORTRESS BUILDER",desc:"The base is locked."},assistantHint:"Write your 'Base Cost' on paper. Sign it. Tape it where you check your bank balance."},
+  {day:5,title:"THE NOISE CALCULATION",theory:"Annualized leaks shock people. $25/day = $9,125/year. That's not coffee. That's compounding freedom lost.",task:"Multiply monthly noise by 12. That's your 'Freedom Score'. Move 50% to a separate account today.",tip:"See it as what you'd lose, not what you spend. Loss aversion triggers action.",mission:"Face the real cost of your leaks.",steps:[{name:"Annual Noise Total",desc:"Add every eliminated leak × 12."},{name:"Freedom Score",desc:"Divide Annual Recovery by monthly cost."},{name:"First Deployment",desc:"Move recovered amount to FORTRESS account."},{name:"◈ SECURE YOUR LINE",desc:"Install NordVPN. Enable kill switch. Verify IP masked.",highlight:true}],timeline:[{time:"08:00",action:"Calculate leaks × 12"},{time:"12:00",action:"Calculate freedom score"},{time:"20:00",action:"Deploy to FORTRESS"}],bonus:"🎁 <strong>THE BONUS:</strong> Most discover $2,400–$6,000/year stolen.<br><br>🔒 <strong>VERIFICATION:</strong> Install NordVPN before advancing.",command:"CALCULATED",rewards:{capital:20,focus:10,vitality:0,sovereignty:15},achievement:{title:"NOISE MEASURED",desc:"The real cost is known."},verificationGate:{required:true,title:"◈ SECURE YOUR DIGITAL PERIMETER",desc:"Before advancing, establish your first line of defense:",checks:["NordVPN installed and active","Kill switch enabled","IP masked (verified on ipleak.net)","Auto-connect on startup enabled"],cta:{text:"🔗 GET NORDVPN — 50% OFF + 3 MONTHS FREE",link:AFFILIATE_LINKS.nordvpn},confirmText:"I have secured my connection",bonusReward:{sovereignty:10}},assistantHint:"Open NordVPN. Turn on 'Kill Switch'. Visit ipleak.net. If your real IP doesn't show, you're invisible."},
+  {day:6,title:"SECOND-HAND SOVEREIGNTY",theory:"Unused items are dead capital. They occupy space, collect dust, and drain mental bandwidth. Convert them.",task:"List 5 items unused in 6 months. Price them 30% below market. List them today.",tip:"Speed > Perfection. A quick sale clears space for focus.",mission:"Convert dead assets into live capital.",steps:[{name:"Asset inventory",desc:"List everything unused in 6 months."},{name:"The Market",desc:"List top 5 items on marketplace. Price to sell."},{name:"Capital conversion",desc:"Every sale goes to FORTRESS account."}],timeline:[{time:"08:00",action:"Build sell list"},{time:"12:00",action:"List items"},{time:"20:00",action:"Track responses"}],bonus:"🎁 <strong>THE BONUS:</strong> Clutter → capital.",command:"CONVERTED",rewards:{capital:25,focus:5,vitality:0,sovereignty:10},achievement:{title:"DEAD WEIGHT KILLED",desc:"Clutter converted."},assistantHint:"Use eBay, Facebook Marketplace, or local buy/sell groups. Clear photos. Simple descriptions. Sell fast."},
+  {day:7,title:"THE INTEREST KILLER",theory:"Debt interest compounds against you. $5k at 20% APR costs you $1k/year. That's a salary drain.",task:"List every debt: amount, rate, minimum payment. Attack the highest rate first (Avalanche method).",tip:"Don't spread extra money thin. Hit one debt hard. Payoff triggers momentum.",mission:"Execute the silent assassin draining your future.",steps:[{name:"Debt mapping",desc:"List every debt. Amount, rate, minimum."},{name:"The Avalanche",desc:"Pour recovered dollars into highest-interest debt."},{name:"The Timeline",desc:"Calculate payoff date at accelerated rate."}],timeline:[{time:"08:00",action:"List debts by rate"},{time:"12:00",action:"Calculate interest cost"},{time:"20:00",action:"Attack highest-interest"}],bonus:"🎁 <strong>THE BONUS:</strong> Every $1 above minimum saves $3-5.",command:"TARGETED",rewards:{capital:25,focus:5,vitality:0,sovereignty:10},achievement:{title:"DEBT SLAYER",desc:"The fire is being extinguished."},assistantHint:"Sort debts by interest rate (highest first). Make minimums on all. Throw every extra dollar at #1."},
+  {day:8,title:"INVISIBLE GEAR",theory:"Logo clothing is free advertising for brands. You're paying to promote them while shrinking your margin.",task:"Audit your wardrobe. Replace visible logos with neutral, durable pieces. Quality > Quantity.",tip:"Neutral colors (black, navy, grey, earth tones) last longer and signal quiet confidence.",mission:"Stop paying for the privilege of advertising others.",steps:[{name:"Logo audit",desc:"Count every visible brand logo you wear."},{name:"The Invisible Standard",desc:"Commit to no visible logos. Neutral, quality, timeless."},{name:"Quality vs Quantity",desc:"One well-made item beats five cheap branded."}],timeline:[{time:"08:00",action:"Count logos"},{time:"12:00",action:"Research quality replacement"},{time:"20:00",action:"Audit next purchase"}],bonus:"🎁 <strong>THE BONUS:</strong> Stop advertising for others. Become unreadable.",command:"INVISIBLE",rewards:{capital:10,focus:10,vitality:5,sovereignty:15},achievement:{title:"GHOST WARDROBE",desc:"No logos. Pure function."},assistantHint:"Start with your most-worn jacket or shoes. Unbranded ≠ cheap. It means deliberate."},
+  {day:9,title:"CALORIE VS COST",theory:"Processed food is expensive calories. Whole foods (eggs, oats, rice, frozen veggies) cost pennies per gram.",task:"Track 3 days of food. Calculate cost per protein gram. Swap 1 processed item for a whole-food alternative.",tip:"Batch cooking 2x/week cuts grocery bills by 30% and eliminates decision fatigue.",mission:"Audit your fuel. Cut the marketing noise.",steps:[{name:"Nutrition audit",desc:"List last 10 food purchases. Calculate price per gram of protein."},{name:"Cheap protein stack",desc:"Identify 5 highest-value foods per dollar."},{name:"Meal system",desc:"Design 3 default meals. Batch cook twice weekly."}],timeline:[{time:"08:00",action:"Calculate protein cost"},{time:"12:00",action:"Identify value foods"},{time:"20:00",action:"Design meal system"}],bonus:"🎁 <strong>THE BONUS:</strong> Cut $100–$300/month.",command:"OPTIMIZED",rewards:{capital:15,focus:5,vitality:15,sovereignty:5},achievement:{title:"CLEAN FUEL",desc:"Marketing tax eliminated."},assistantHint:"Eggs, lentils, oats, frozen chicken, rice. Buy in bulk. Cook Sundays. Store in portions."},
+  {day:10,title:"THE FIRST RECOVERY",theory:"10 days of noise elimination creates real capital. Most people recover $200-500 without changing income.",task:"Sum eliminated leaks × 12. Move 50% to a separate account. This is your first brick.",tip:"Don't look at it. Let it compound. The gap between you and the 90% just widened.",mission:"Calculate your first 10 days of reclaimed capital.",steps:[{name:"Recovery calculation",desc:"Add every leak eliminated × 12."},{name:"Baseline comparison",desc:"Compare this week vs last month."},{name:"The first brick",desc:"Move 50% of recovered capital to sovereign account."}],timeline:[{time:"08:00",action:"Calculate recovered capital"},{time:"12:00",action:"Measure the gap"},{time:"20:00",action:"Deploy to sovereign account"}],bonus:"🎁 <strong>THE BONUS:</strong> Most recover $200-500 in 10 days.",command:"RECOVERED",rewards:{capital:20,focus:10,vitality:5,sovereignty:20},achievement:{title:"PHASE I COMPLETE",desc:"The bleeding has stopped."},assistantHint:"Open a separate savings account. Name it 'FORTRESS'. Transfer your recovery. Don't touch it."},
+  {day:11,title:"PRIVACY LAYER",theory:"Default browsers track you. Targeted ads trigger impulse buys. Privacy = financial friction.",task:"Switch to Brave or Firefox. Enable strict tracking protection. Delete unused apps.",tip:"When they can't see you, they can't sell to you. Silence reduces spending by default.",mission:"Make your financial intentions invisible.",steps:[{name:"Browser switch",desc:"Switch to Brave or Firefox."},{name:"VPN activation",desc:"Install and activate VPN."},{name:"App permissions audit",desc:"Delete apps that harvest more than needed."}],timeline:[{time:"08:00",action:"Switch browser"},{time:"12:00",action:"Activate VPN"},{time:"20:00",action:"Audit permissions"}],bonus:"🎁 <strong>THE BONUS:</strong> When searches stop being tracked, impulse ads disappear.",command:"SECURE",rewards:{capital:5,focus:15,vitality:0,sovereignty:25},achievement:{title:"GHOST MODE",desc:"Digital perimeter secured."},assistantHint:"Settings → Privacy → Strict. Clear cache weekly. Delete shopping apps. Use desktop only for purchases."},
+  {day:12,title:"THE SIGNAL NETWORK",theory:"You average the 5 people you spend time with. If they spend, you spend. If they build, you build.",task:"List 5 closest contacts. Label: Builder, Neutral, Drain. Reduce drain frequency. Add 1 sovereign voice.",tip:"Proximity shapes behavior more than willpower. Curate your circle deliberately.",mission:"Exit the circles that drain your capital.",steps:[{name:"Network audit",desc:"List 5 closest people. Builder or consumer?"},{name:"Signal vs Noise",desc:"Identify who triggers spending patterns."},{name:"Sovereign input",desc:"Find one sovereign voice. Add to daily input."},{name:"◈ ESTABLISH SOVEREIGN BANKING",desc:"Open account with privacy-focused bank. Enable 2FA.",highlight:true}],timeline:[{time:"08:00",action:"Map network"},{time:"12:00",action:"Identify triggers"},{time:"20:00",action:"Add sovereign input"}],bonus:"🎁 <strong>THE BONUS:</strong> One changed input shifts your trajectory.<br><br>🏦 <strong>VERIFICATION:</strong> Sovereign bank account opened.",command:"MAPPED",rewards:{capital:10,focus:15,vitality:0,sovereignty:20},achievement:{title:"NETWORK CLEAN",desc:"Drain identified."},verificationGate:{required:true,title:"◈ ESTABLISH SOVEREIGN BANKING",desc:"Secure your capital foundation:",checks:["Account opened with privacy-focused bank","2FA enabled","Direct deposit configured","Emergency contact set"],cta:{text:"🔗 FIND SOVEREIGN BANK OPTIONS",link:"#"},confirmText:"I have established sovereign banking",bonusReward:{capital:10,sovereignty:10}},assistantHint:"Mute, don't confront. Change hangout locations. Follow podcasts/books that teach systems, not hype."},
+  {day:13,title:"AUTOMATED TRANSFERS",theory:"Willpower fails. Systems win. Automatic transfers happen before you see the money. Invisible = safe.",task:"Set auto-transfer to FORTRESS on payday. Start at 10%. Increase by 1% monthly.",tip:"Pay yourself first. Rent comes later. The order determines your net worth.",mission:"Make saving automatic. Remove willpower from the equation.",steps:[{name:"Automation setup",desc:"Set auto-transfer to FORTRESS on payday."},{name:"The percentage",desc:"Start at 10% minimum. Automate today."},{name:"Invisible money",desc:"What you never see, you never spend."}],timeline:[{time:"08:00",action:"Set up auto-transfer"},{time:"12:00",action:"Confirm amount & date"},{time:"20:00",action:"Verify automation"}],bonus:"🎁 <strong>THE BONUS:</strong> Automated saving removes the decision.",command:"AUTOMATED",rewards:{capital:20,focus:10,vitality:0,sovereignty:15},achievement:{title:"SYSTEM ACTIVE",desc:"Saving is automatic."},assistantHint:"Bank app → Transfers → Schedule. Set for payday + 1 day. Name it 'FORTRESS FUEL'."},
+  {day:14,title:"THE SKILL GAP",theory:"Income caps out. Skills compound. The highest ROI move is learning what the market pays premium for.",task:"Research your industry's next tier. Identify 1 skill that raises your rate in 90 days. Design 30-min daily practice.",tip:"Deliberate practice > passive watching. Build projects. Get feedback. Repeat.",mission:"Identify the one skill that multiplies your value.",steps:[{name:"Market value audit",desc:"Research what your next skill level earns."},{name:"The one skill",desc:"Name the single skill that increases market value in 90 days."},{name:"Learning system",desc:"Design 30-minute daily practice. Deliberate only."}],timeline:[{time:"08:00",action:"Research market rates"},{time:"12:00",action:"Name the one skill"},{time:"20:00",action:"Design practice system"}],bonus:"🎁 <strong>THE BONUS:</strong> A skill learned this year pays for the rest of your career.",command:"IDENTIFIED",rewards:{capital:10,focus:25,vitality:0,sovereignty:15},achievement:{title:"GAP FOUND",desc:"The one skill is identified."},assistantHint:"Look at job postings 2 levels above you. What skill appears 80% of the time? That's your target."},
+  {day:15,title:"EMERGENCY LIQUIDITY",theory:"Freak expenses destroy progress. 3 months of base cost in cash removes fear. Fear drives bad decisions.",task:"Calculate 3-month base cost. Open separate MOAT account. Set monthly fill plan.",tip:"This isn't an investment. It's insurance. Keep it in HYSA or money market. Don't touch unless roof leaks.",mission:"Build the buffer that makes you untouchable.",steps:[{name:"Target calculation",desc:"3 months of Base Cost. Exact number."},{name:"Separate account",desc:"Open MOAT account. Never touch for non-emergencies."},{name:"Monthly fill plan",desc:"Calculate amount to hit target in 6 months."}],timeline:[{time:"08:00",action:"Calculate 3-month target"},{time:"12:00",action:"Open MOAT account"},{time:"20:00",action:"Set auto-transfer to MOAT"}],bonus:"🎁 <strong>THE BONUS:</strong> With 3 months liquidity, you lose the fear.",command:"SECURED",rewards:{capital:20,focus:10,vitality:0,sovereignty:20},achievement:{title:"MOAT ACTIVE",desc:"Untouchable buffer being built."},assistantHint:"Name the account 'MOAT'. Set auto-transfer. Track progress weekly. Ignore market noise."},
+  {day:16,title:"THE LOW-ENTROPY HOME",theory:"Clutter taxes attention. Every object demands a decision. Clear surfaces = clear mind = better financial calls.",task:"60-minute sweep. Fill 1 bag with non-essentials. Flatten all surfaces. Default to clean.",tip:"Entrophy wins by default. Schedule 15-min resets. Low friction beats high motivation.",mission:"Clear the physical noise. Reclaim mental bandwidth.",steps:[{name:"The one-hour sweep",desc:"60 minutes. Fill one bag with non-essentials."},{name:"Flat surfaces rule",desc:"Every flat surface empty except daily-use items."},{name:"Decision architecture",desc:"Arrange items so defaults are best choices."},{name:"◈ ERASE DIGITAL FOOTPRINT",desc:"Remove personal data from broker databases.",highlight:true}],timeline:[{time:"08:00",action:"Start one-hour sweep"},{time:"12:00",action:"Clear flat surfaces"},{time:"20:00",action:"Submit data removal"}],bonus:"🎁 <strong>THE BONUS:</strong> Cleaner space, sharper mind.<br><br>🕵️ <strong>VERIFICATION:</strong> Data removal request submitted.",command:"CLEARED",rewards:{capital:5,focus:20,vitality:10,sovereignty:15},achievement:{title:"ZERO ENTROPY",desc:"Environment is now ally."},verificationGate:{required:true,title:"◈ ERASE YOUR DIGITAL GHOST",desc:"Remove your data from 190+ broker databases:",checks:["Data removal service activated","Personal info submitted for removal","Confirmation email received","Monitoring dashboard accessible"],cta:{text:"🔗 REMOVE MY DATA — 55% OFF LIFETIME",link:AFFILIATE_LINKS.dataRemoval},confirmText:"I have initiated data removal",bonusReward:{sovereignty:15}},assistantHint:"Set timer for 60 min. Don't overthink. Bag = trash/donate. Surfaces = clear. Reset daily."},
+  {day:17,title:"MARKET DETOX",theory:"Daily market checking triggers emotional trading. Investors who check daily underperform by ~40%.",task:"Unsubscribe from financial news. Delete trading apps. Set 1x/week review window.",tip:"Primary sources > headlines. Quarterly reports > tweets. Silence beats noise.",mission:"Practice emotional detachment from the noise.",steps:[{name:"Unsubscribe",desc:"Unsubscribe from financial news emails. Delete market apps."},{name:"Review cadence",desc:"Establish review schedule: once per week max."},{name:"Signal reading",desc:"Replace news with primary source data."}],timeline:[{time:"08:00",action:"Unsubscribe from noise"},{time:"12:00",action:"Delete market apps"},{time:"20:00",action:"Write review schedule"}],bonus:"🎁 <strong>THE BONUS:</strong> The investor who checks daily earns 40% less.",command:"DETOXED",rewards:{capital:5,focus:20,vitality:0,sovereignty:20},achievement:{title:"EMOTIONLESS",desc:"Market noise silenced."},assistantHint:"Pick Tuesday 8 PM. Review holdings. Adjust if broken. Close browser. Don't look back until next week."},
+  {day:18,title:"THE ARCHITECT'S TOOLS",theory:"Time is the scarcest resource. Automate friction. Buy back hours. Compound your attention.",task:"Track 3 days. Mark high-friction tasks. Research 1 tool that eliminates the worst one.",tip:"If you do it weekly, automate it. If it costs <$50, do it now. Time ROI > Money ROI.",mission:"Invest in tools that buy you time.",steps:[{name:"Time audit",desc:"Track every hour. Mark value vs friction."},{name:"Friction map",desc:"Identify top 3 time-friction tasks."},{name:"Tool investment",desc:"Research one tool that eliminates highest-friction task."}],timeline:[{time:"08:00",action:"Start time tracking"},{time:"12:00",action:"Identify friction tasks"},{time:"20:00",action:"Research tool"}],bonus:"🎁 <strong>THE BONUS:</strong> One tool saving 1h/day = 365h/year.",command:"OPTIMIZED",rewards:{capital:10,focus:20,vitality:0,sovereignty:15},achievement:{title:"TIME SOVEREIGN",desc:"Friction map complete."},assistantHint:"Examples: Bill pay auto, email templates, password manager, IFTTT/Zapier. Automate the boring."},
+  {day:19,title:"TAX HYGIENE",theory:"Taxes are a silent leak. Legal deductions are your right. Ignorance costs 5-15% of income annually.",task:"List applicable deductions. Research optimal structure. Calculate ROI of a professional.",tip:"Document everything. Receipts → folder → category. Clean books = lower audit risk + higher returns.",mission:"Stop donating to the machine. Keep what you earn.",steps:[{name:"Deduction audit",desc:"List every legal deduction applicable."},{name:"Structure review",desc:"Research optimal income structure."},{name:"Professional ROI",desc:"Calculate cost vs benefit of tax professional."}],timeline:[{time:"08:00",action:"List deductions"},{time:"12:00",action:"Research structure"},{time:"20:00",action:"Calculate ROI"}],bonus:"🎁 <strong>THE BONUS:</strong> For every $1 on optimization, most recover $3–$10.",command:"OPTIMIZED",rewards:{capital:20,focus:10,vitality:0,sovereignty:15},achievement:{title:"TAX SOVEREIGN",desc:"Machine no longer overcharges."},assistantHint:"Home office, mileage, education, software, retirement contributions. Track monthly. File quarterly."},
+  {day:20,title:"ASSET MAPPING",theory:"Net worth isn't a number. It's a map. Assets work for you. Liabilities work against you.",task:"List every asset. List every liability. Calculate net worth. Update monthly.",tip:"Focus on acquiring productive assets (skills, investments, equity). Avoid lifestyle liabilities.",mission:"Know exactly what you own and what owns you.",steps:[{name:"Asset inventory",desc:"List every asset: cash, investments, real estate."},{name:"Liability map",desc:"List every liability: debt, mortgage, loans."},{name:"Net worth calculation",desc:"Assets minus liabilities = fortress size."}],timeline:[{time:"08:00",action:"List assets"},{time:"12:00",action:"List liabilities"},{time:"20:00",action:"Calculate net worth"}],bonus:"🎁 <strong>THE BONUS:</strong> Knowing exact net worth removes anxiety.",command:"MAPPED",rewards:{capital:20,focus:10,vitality:0,sovereignty:20},achievement:{title:"FORTRESS MAPPED",desc:"Total clarity."},assistantHint:"Spreadsheet: Assets (cash, retirement, equity) | Liabilities (loans, credit) | Net = A-L. Review monthly."},
+  {day:21,title:"THE EXIT PLAN",theory:"Fear of disaster causes panic. A written plan removes emotion. Runway = options.",task:"Define triggers for Plan B. Calculate months MOAT+FORTRESS buy. Write 1-page escape blueprint.",tip:"Having an exit plan makes you take better risks. You're never trapped. You're prepared.",mission:"Define your Plan B. Know your escape route.",steps:[{name:"Trigger definition",desc:"Define conditions to activate Plan B."},{name:"The runway",desc:"Calculate months FORTRESS+MOAT buy if income stops."},{name:"Plan B blueprint",desc:"Write one-page plan: where, what, liquidate first."}],timeline:[{time:"08:00",action:"Define triggers"},{time:"12:00",action:"Calculate runway"},{time:"20:00",action:"Write blueprint"}],bonus:"🎁 <strong>THE BONUS:</strong> Written exit plan reduces anxiety by 60%.",command:"PLANNED",rewards:{capital:15,focus:15,vitality:0,sovereignty:25},achievement:{title:"ESCAPE ROUTE READY",desc:"Plan B written."},assistantHint:"Triggers: layoff, health, market crash. Runway: liquid assets / monthly base. Blueprint: location, income, costs."},
+  {day:22,title:"HARD ASSET DRILL",theory:"Digital accounts can be frozen. Hard assets survive systems. Diversify into unfreezable stores.",task:"Research hard assets. Calculate portfolio balance. Define first acquisition. Open regulated crypto account.",tip:"Start small. 5-10% in hard assets. Security > speculation. Custody = control.",mission:"Learn what the system cannot delete.",steps:[{name:"Hard asset education",desc:"Research: gold/silver, land, skills, foreign accounts."},{name:"Portfolio balance",desc:"Calculate % freezable vs unfreezable assets."},{name:"First hard asset",desc:"Define first hard asset to acquire. Write purchase date."},{name:"◈ CRYPTO INFRASTRUCTURE",desc:"Set up account on regulated crypto platform. Enable 2FA.",highlight:true}],timeline:[{time:"08:00",action:"Research hard assets"},{time:"12:00",action:"Calculate ratio"},{time:"20:00",action:"Create crypto account"}],bonus:"🎁 <strong>THE BONUS:</strong> Empires with hard assets survived transitions.<br><br>₿ <strong>VERIFICATION:</strong> Crypto account created.",command:"DRILLED",rewards:{capital:15,focus:15,vitality:0,sovereignty:25},achievement:{title:"HARD ASSET HOLDER",desc:"Unfreezable position building."},verificationGate:{required:true,title:"◈ ESTABLISH CRYPTO INFRASTRUCTURE",desc:"Set up sovereign revenue channel:",checks:["Account created on Nexo platform","Identity verification completed","2FA enabled (authenticator app)","Small test deposit made ($10-50)"],cta:{text:"🔗 JOIN NEXO — EARN 10% APY ON CRYPTO",link:AFFILIATE_LINKS.nexo},confirmText:"I have established crypto account",bonusReward:{capital:10,sovereignty:10}},assistantHint:"Start with self-custody wallet + 2FA. Buy blue-chip only. Dollar-cost average. Never leverage."},
+  {day:23,title:"THE SOVEREIGN OATH",theory:"Rules without enforcement are wishes. Written, signed oaths trigger behavioral commitment.",task:"Write 5-7 financial rules. Define 'enough'. Read aloud. Post where decisions are made.",tip:"Your future self reads your current rules. Write them like law. Enforce them like war.",mission:"Write the rules of your financial kingdom.",steps:[{name:"The core rules",desc:"Write 5-7 non-negotiable financial rules. Sign. Date."},{name:"The definitions",desc:"Define what 'enough' looks like. Concrete numbers."},{name:"The oath",desc:"Read aloud. Post where you make decisions."}],timeline:[{time:"08:00",action:"Write 5-7 rules"},{time:"12:00",action:"Define 'enough'"},{time:"20:00",action:"Read aloud & post"}],bonus:"🎁 <strong>THE BONUS:</strong> Written rules reduce impulse decisions by 70%.",command:"SWORN",rewards:{capital:10,focus:15,vitality:0,sovereignty:30},achievement:{title:"CONSTITUTION WRITTEN",desc:"Laws of fortress set."},assistantHint:"Examples: 'I automate 10% first.' 'I wait 24h for $50+.' 'I buy skills, not status.' Sign it."},
+  {day:24,title:"NEGOTIATION DAY",theory:"Most prices are negotiable. Companies expect churn. Polite firmness saves $50-200/month effortlessly.",task:"List 5 recurring costs. Script: 'What's the best rate?' Make calls. Log savings.",tip:"Be ready to cancel. Silence after asking works better than arguing. Take notes.",mission:"Take back what the system overcharges you for.",steps:[{name:"Target list",desc:"List 5 recurring costs: insurance, internet, phone, subscriptions, rent."},{name:"The script",desc:"Prepare: 'What's the best rate you can offer me?'"},{name:"The calls",desc:"Make calls. Be polite, firm, willing to cancel."}],timeline:[{time:"08:00",action:"List targets"},{time:"12:00",action:"Practice script"},{time:"20:00",action:"Make calls & log savings"}],bonus:"🎁 <strong>THE BONUS:</strong> Average negotiation saves $50–$200/month.",command:"NEGOTIATED",rewards:{capital:25,focus:10,vitality:0,sovereignty:20},achievement:{title:"SOVEREIGN NEGOTIATOR",desc:"System pays what you deserve."},assistantHint:"Call retention dept. State loyalty. Ask for best rate. Pause. Take offer or walk. Repeat monthly."},
+  {day:25,title:"DEEP RESEARCH",theory:"Headlines create noise. Primary sources create edge. 3 hours of deep reading > 30 days of scrolling.",task:"Define 1 high-value question. Read books/reports/studies. Write 1-paragraph insight.",tip:"Search academic journals, SEC filings, government data. Avoid opinion. Follow data.",mission:"Expand the fortress walls with new knowledge.",steps:[{name:"The question",desc:"Define single most valuable question fortress needs."},{name:"Primary sources",desc:"3 hours on primary sources only. Books, studies, reports."},{name:"The insight",desc:"Write one-paragraph summary of most valuable learning."}],timeline:[{time:"08:00",action:"Write question precisely"},{time:"12:00",action:"3h primary research"},{time:"20:00",action:"Write insight summary"}],bonus:"🎁 <strong>THE BONUS:</strong> One correct insight can generate 10–100× return.",command:"RESEARCHED",rewards:{capital:10,focus:25,vitality:0,sovereignty:20},achievement:{title:"SIGNAL EXTRACTED",desc:"Deep research complete."},assistantHint:"Example: 'How do top 1% structure retirement?' Read IRS pubs, academic papers, founder interviews. Synthesize."},
+  {day:26,title:"NETWORK AUDIT",theory:"Your network is your net worth. Drain contacts trigger spending. Builders trigger compounding.",task:"Rate top 20 contacts. Reduce drain frequency. Message 1 builder. Offer value first.",tip:"Don't cut ties abruptly. Shift interaction frequency. Add signal. Subtract noise.",mission:"Identify and connect with sovereign allies.",steps:[{name:"Full audit",desc:"List top 20 contacts. Rate: adds value / neutral / drains."},{name:"The prune",desc:"Reduce contact frequency with drain contacts."},{name:"The connect",desc:"Identify one person at target level. Send value-first message."}],timeline:[{time:"08:00",action:"List & rate contacts"},{time:"12:00",action:"Reduce drain contacts"},{time:"20:00",action:"Send sovereign message"}],bonus:"🎁 <strong>THE BONUS:</strong> Five closest contacts determine trajectory.",command:"AUDITED",rewards:{capital:10,focus:15,vitality:0,sovereignty:25},achievement:{title:"NETWORK SOVEREIGN",desc:"Circle clean. Allies identified."},assistantHint:"Message template: 'Saw your work on X. Built Y recently. Happy to share notes if useful.' No asks. Just value."},
+  {day:27,title:"THE FRICTION TEST",theory:"Every 'yes' to noise is a 'no' to freedom. Friction is the tax on weak boundaries.",task:"List regretted 'yeses' last month. Write default 'no'. Apply it today. Log results.",tip:"'That doesn't fit my current priorities.' Polite. Firm. Final. Practice until automatic.",mission:"Master the most powerful word in finance: No.",steps:[{name:"The no list",desc:"List every yes last month you shouldn't have given."},{name:"The sovereign response",desc:"Write default no: 'That doesn't fit my priorities.'"},{name:"Real-time application",desc:"Say no to first non-essential request today. Log it."}],timeline:[{time:"08:00",action:"List regretted yeses"},{time:"12:00",action:"Practice sovereign no"},{time:"20:00",action:"Log today's nos"}],bonus:"🎁 <strong>THE BONUS:</strong> Every no to noise is a yes to fortress.",command:"REFUSED",rewards:{capital:10,focus:20,vitality:0,sovereignty:25},achievement:{title:"NO IS SOVEREIGN",desc:"Most powerful word active."},assistantHint:"Don't over-explain. No justification = no negotiation. Test it once today. Notice the relief."},
+  {day:28,title:"DIGITAL SECURITY",theory:"90% of breaches use compromised passwords. Master keys (email) get targeted first. Friction stops attacks.",task:"Audit financial passwords. Enable 2FA everywhere. Secure email. Register domain/hosting.",tip:"Password manager + hardware key = impenetrable. Convenience breeds compromise. Choose control.",mission:"Make your fortress impenetrable.",steps:[{name:"Password audit",desc:"Every financial account: unique 20+ char password. Use password manager."},{name:"Two-factor everything",desc:"Enable 2FA on every financial account, email, investment."},{name:"Email security",desc:"Your email is master key. Unique password. 2FA mandatory."},{name:"◈ SECURE YOUR INFRASTRUCTURE",desc:"Register domain + hosting for your sovereign project.",highlight:true}],timeline:[{time:"08:00",action:"Audit passwords"},{time:"12:00",action:"Enable 2FA"},{time:"20:00",action:"Secure email"}],bonus:"🎁 <strong>THE BONUS:</strong> 90% of takeovers use compromised passwords.<br><br>🌐 <strong>VERIFICATION:</strong> Domain + hosting secured.",command:"SECURED",rewards:{capital:5,focus:10,vitality:0,sovereignty:35},achievement:{title:"FORTRESS LOCKED",desc:"Digital perimeter impenetrable."},verificationGate:{required:true,title:"◈ SECURE YOUR DIGITAL INFRASTRUCTURE",desc:"Establish your sovereign web presence:",checks:["Domain registered in your name","Hosting account created","SSL certificate enabled","Basic site structure deployed"],cta:{text:"🔗 GET DOMAIN + HOSTING — START AT $2.95/MO",link:"#"},confirmText:"I have secured my infrastructure",bonusReward:{sovereignty:15}},assistantHint:"Use Bitwarden/1Password. Generate 20-char passwords. Enable TOTP 2FA. Backup recovery codes offline."},
+  {day:29,title:"THE FINAL SUNSET",theory:"30 days of execution rewires behavior. Review creates clarity. Clarity compounds results.",task:"Calculate total recovered. Review stats. Identify gaps. Design Month 2 at higher standard.",tip:"Don't restart. Level up. Same systems. Tighter margins. Higher focus. You're not beginner anymore.",mission:"Review 30 days of silent execution.",steps:[{name:"30-day measurement",desc:"Pull Day 10 recovery. Add Phase II+III. Total result."},{name:"Score review",desc:"Review stats. Capital, Focus, Sovereignty — gaps?"},{name:"Next phase design",desc:"Write Month 2 objective. Same system. Higher standard."}],timeline:[{time:"08:00",action:"Calculate total recovered"},{time:"12:00",action:"Review stats & gaps"},{time:"20:00",action:"Write Month 2 objective"}],bonus:"🎁 <strong>THE BONUS:</strong> Most who complete 30 days never return to old life.",command:"REVIEWED",rewards:{capital:15,focus:20,vitality:5,sovereignty:20},achievement:{title:"SUNSET COMPLETE",desc:"30 days measured."},assistantHint:"Export your spreadsheet. Compare Day 1 vs Day 29. Note what stuck. Double down on winners. Cut losers."},
+  {day:30,title:"SOVEREIGN ACTIVATION",theory:"You don't chase money. You attract it through systems, skills, and silence. The protocol is complete.",task:"Read Oath. Write fortress report. Set next 30-day target. Activate Sovereign Engine.",tip:"The end of phase 1 is the start of compounding. Repeat the cycle. Raise the bar. Stay quiet.",mission:"You no longer chase money. You attract it.",steps:[{name:"The declaration",desc:"Read Sovereign Oath. Every rule — living it? Adjust if needed."},{name:"The fortress report",desc:"Write one-page report: where started, what built, what remains."},{name:"The continuation",desc:"Set next 30-day target. Same system. Higher standard."},{name:"◈ ACTIVATE SOVEREIGN ENGINE",desc:"Connect final VIP tool to automate your fortress.",highlight:true}],timeline:[{time:"08:00",action:"Read oath & verify"},{time:"12:00",action:"Write fortress report"},{time:"20:00",action:"Set next target"}],bonus:"🎁 <strong>THE BONUS:</strong> You no longer chase money. You attract it.<br><br>⚙️ <strong>VERIFICATION:</strong> Sovereign Engine activated.",command:"ACTIVATED",rewards:{capital:20,focus:20,vitality:10,sovereignty:30},achievement:{title:"SOVEREIGN ARCHITECT",desc:"Protocol complete. Architect live."},verificationGate:{required:true,title:"◈ ACTIVATE YOUR SOVEREIGN ENGINE",desc:"Deploy the final tool that automates your financial fortress:",checks:["VIP tool account created","Integration with existing systems","Automation rules configured","First automated action executed"],cta:{text:"🔗 ACTIVATE SOVEREIGN ENGINE — VIP ACCESS",link:"#"},confirmText:"I have activated my Sovereign Engine",bonusReward:{capital:20,sovereignty:20}},assistantHint:"Review your automation stack. Connect APIs where possible. Set monthly review. You're now running the system."}
+];
+
+const FAKE_PLAYERS = [{name:"MARCUS_V",day:28,score:2840},{name:"ALEXK",day:25,score:2500},{name:"IRON_WILL",day:22,score:2180},{name:"SILENT_OAK",day:19,score:1890},{name:"DARKFORT",day:17,score:1700},{name:"ZERO_DB",day:15,score:1490},{name:"FORTRESS_X",day:12,score:1180},{name:"QUIET_ONE",day:9,score:890},{name:"ARCH_88",day:6,score:590},{name:"NEWBLOOD",day:3,score:280}];
+const ACTIVITY_TEMPLATES = [{name:"MARCUS_V",actions:["completed Day 28","earned achievement: GHOST MODE","+25 Sovereignty"],type:"success"},{name:"ALEXK",actions:["completed Day 25","+20 Capital","killed 3 subscriptions"],type:"success"},{name:"IRON_WILL",actions:["Day 22 — MOAT opened","completed Hard Asset Drill","+15 Sovereignty"],type:"info"},{name:"SILENT_OAK",actions:["completed Day 19 — Tax Hygiene","recovered $89 this month"],type:"info"},{name:"DARKFORT",actions:["Day 17 — Market Detox","deleted 4 financial apps"],type:"info"},{name:"ZERO_DB",actions:["completed Day 15","MOAT funded: $1,500"],type:"success"},{name:"FORTRESS_X",actions:["Day 12 — Network mapped","cut 2 drain contacts"],type:"info"},{name:"QUIET_ONE",actions:["completed Day 9 — Clean Fuel","saved $180/month"],type:"success"},{name:"ARCH_88",actions:["Day 6 — Dead assets converted","sold 5 items: +$340"],type:"info"},{name:"NEWBLOOD",actions:["just started Protocol","Day 1 — Silent Audit"],type:"new"}];
+
+// ==================== STATE ====================
+let state = {name:'',region:'US',charType:'male',day:1,capital:0,focus:0,vitality:0,sovereignty:0,score:0,stepsCompleted:[],dayCompleted:false,streak:0,lastActive:null,unlocked:[1],achievements:[]};
+let selectedChar = null, selectedRegion = null;
+let audioCtx = null, masterGain = null, musicNodes = [], musicPlaying = false, audioEnabled = true;
+let idleTimer = null;
+const canvas = document.getElementById('bg-canvas'), ctx = canvas.getContext('2d');
+let particles = [];
+
+// ==================== AUDIO (ROBUST) ====================
+function initAudio(){
+  if(audioCtx){ if(audioCtx.state==='suspended') audioCtx.resume(); return; }
+  try{
+    audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    masterGain = audioCtx.createGain();
+    masterGain.gain.value = 0.1;
+    masterGain.connect(audioCtx.destination);
+    if(audioCtx.state === 'suspended') audioCtx.resume();
+  }catch(e){}
+}
+
+function playTone(freq, type='sine', duration=0.15, vol=0.08){
+  if(!audioEnabled || !audioCtx) return;
+  if(audioCtx.state === 'suspended') audioCtx.resume();
+  const o = audioCtx.createOscillator(), g = audioCtx.createGain();
+  o.type = type; o.frequency.setValueAtTime(freq, audioCtx.currentTime);
+  g.gain.setValueAtTime(vol, audioCtx.currentTime);
+  g.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + duration);
+  o.connect(g); g.connect(masterGain);
+  o.start(); o.stop(audioCtx.currentTime + duration);
+}
+
+function playSuccess(){ [440,550,660,880].forEach((f,i)=>setTimeout(()=>playTone(f,'sine',0.25,0.1),i*80)); }
+function playBoot(){ [180,250,350,500,700].forEach((f,i)=>setTimeout(()=>playTone(f,'triangle',0.12,0.06),i*100)); }
+function playStep(){ playTone(800,'sine',0.08,0.06); }
+function playError(){ playTone(120,'sawtooth',0.3,0.08); }
+function playAchievement(){ playTone(880,'sine',0.3,0.1); setTimeout(()=>playTone(1100,'sine',0.25,0.08),120); setTimeout(()=>playTone(1320,'sine',0.4,0.06),240); }
+function playHint(){ playTone(660,'sine',0.2,0.05); setTimeout(()=>playTone(880,'sine',0.15,0.04),150); }
+
+function startBackgroundMusic(){
+  if(!audioCtx || musicNodes.length > 0) return;
+  if(audioCtx.state === 'suspended') audioCtx.resume();
+  const drone = audioCtx.createOscillator(), droneGain = audioCtx.createGain();
+  drone.type = 'sine'; drone.frequency.value = 38; droneGain.gain.value = 0.05;
+  drone.connect(droneGain); droneGain.connect(masterGain); drone.start();
+  const pad = audioCtx.createOscillator(), padGain = audioCtx.createGain(), padFilter = audioCtx.createBiquadFilter();
+  pad.type = 'triangle'; pad.frequency.value = 105; padFilter.type = 'lowpass'; padFilter.frequency.value = 320;
+  padGain.gain.value = 0.03; pad.connect(padFilter); padFilter.connect(padGain); padGain.connect(masterGain); pad.start();
+  const lfo = audioCtx.createOscillator(), lfoGain = audioCtx.createGain();
+  lfo.type = 'sine'; lfo.frequency.value = 0.06; lfoGain.gain.value = 12;
+  lfo.connect(lfoGain); lfoGain.connect(pad.frequency); lfo.start();
+  musicNodes = [drone, pad, lfo, droneGain, padGain, lfoGain];
+}
+function stopBackgroundMusic(){ musicNodes.forEach(n => { try{n.stop();}catch(e){} }); musicNodes = []; }
+function toggleAudio(){
+  audioEnabled = !audioEnabled;
+  document.querySelector('.audio-toggle').textContent = audioEnabled ? '🔊' : '🔇';
+  document.querySelector('.audio-toggle').style.opacity = audioEnabled ? '0.5' : '0.2';
+  if(!audioEnabled) stopBackgroundMusic();
+  else { initAudio(); if(document.getElementById('game').classList.contains('active')) startBackgroundMusic(); }
+}
+
+// ==================== CANVAS BG ====================
+function resizeCanvas(){ canvas.width=window.innerWidth; canvas.height=window.innerHeight; }
+resizeCanvas(); window.addEventListener('resize', resizeCanvas);
+class BgParticle{
+  constructor(){ this.reset(); }
+  reset(){ this.x=Math.random()*canvas.width; this.y=Math.random()*canvas.height; this.size=Math.random()*1.1+0.3; this.speedY=Math.random()*0.22+0.06; this.speedX=(Math.random()-0.5)*0.12; this.opacity=Math.random()*0.22+0.04; this.pulse=Math.random()*Math.PI*2; }
+  update(){ this.y-=this.speedY; this.x+=this.speedX; this.pulse+=0.014; if(this.y<-10||this.x<-10||this.x>canvas.width+10) this.reset(); }
+  draw(){ const o=this.opacity+Math.sin(this.pulse)*0.07; ctx.fillStyle=`rgba(212,175,55,${Math.max(0,o)})`; ctx.beginPath(); ctx.arc(this.x,this.y,this.size,0,Math.PI*2); ctx.fill(); }
+}
+for(let i=0;i<55;i++) particles.push(new BgParticle());
+function drawConnections(){ for(let i=0;i<particles.length;i++) for(let j=i+1;j<particles.length;j++){ const dx=particles[i].x-particles[j].x, dy=particles[i].y-particles[j].y, dist=Math.sqrt(dx*dx+dy*dy); if(dist<95){ ctx.strokeStyle=`rgba(212,175,55,${(1-dist/95)*0.05})`; ctx.lineWidth=0.35; ctx.beginPath(); ctx.moveTo(particles[i].x,particles[i].y); ctx.lineTo(particles[j].x,particles[j].y); ctx.stroke(); } } }
+function animateCanvas(){ ctx.clearRect(0,0,canvas.width,canvas.height); particles.forEach(p=>{p.update();p.draw()}); drawConnections(); requestAnimationFrame(animateCanvas); }
+animateCanvas();
+
+// ==================== CHAR & REGION ====================
+function selectChar(type){ selectedChar = type; document.querySelectorAll('.char-card').forEach(c=>c.classList.remove('selected')); document.querySelector(`.char-card[data-char="${type}"]`).classList.add('selected'); checkCharReady(); }
+function selectRegion(region){ selectedRegion = region; document.querySelectorAll('.modal-option').forEach(el=>el.classList.remove('selected')); const sel = document.querySelector(`[data-region="${region}"]`); if(sel) sel.classList.add('selected'); checkCharReady(); }
+function checkCharReady(){ document.getElementById('confirm-char-btn').disabled = !(selectedChar && selectedRegion); }
+function confirmCharSelection(){
+  if(!selectedChar || !selectedRegion) return;
+  state.charType = selectedChar; state.region = selectedRegion;
+  document.getElementById('onboarding').style.display = 'none';
+  saveState(); showScreen('loading'); runLoading();
+}
+
+// ==================== HEADER CHARACTER & PROGRESS ====================
+function renderHeaderChar(){
+  const iconEl = document.getElementById('char-icon'), levelEl = document.getElementById('char-level'), dayEl = document.getElementById('char-day'), ringFill = document.getElementById('char-ring-fill'), charWrap = document.getElementById('header-char');
+  if(!iconEl) return;
+  const svgs = {
+    male: `<svg viewBox="0 0 100 100"><circle cx="50" cy="45" r="22" fill="#0a0a0f" stroke="var(--gold)" stroke-width="2"/><path d="M38,55 Q50,75 62,55 L62,85 L38,85Z" fill="#0a0a0f" stroke="var(--gold)" stroke-width="2"/><rect x="42" y="60" width="16" height="12" rx="2" fill="none" stroke="var(--gold)" stroke-width="1.5"/><circle cx="44" cy="42" r="3" fill="var(--gold)"/><circle cx="56" cy="42" r="3" fill="var(--gold)"/><path d="M44,48 Q50,52 56,48" fill="none" stroke="var(--gold)" stroke-width="1.5"/></svg>`,
+    female: `<svg viewBox="0 0 100 100"><circle cx="50" cy="45" r="22" fill="#0a0a0f" stroke="var(--gold)" stroke-width="2"/><path d="M38,55 Q50,70 62,55 L62,85 L38,85Z" fill="#0a0a0f" stroke="var(--gold)" stroke-width="2"/><path d="M40,35 Q35,25 45,30 M60,35 Q65,25 55,30" fill="none" stroke="var(--gold)" stroke-width="1.5"/><circle cx="44" cy="42" r="3" fill="var(--gold)"/><circle cx="56" cy="42" r="3" fill="var(--gold)"/><path d="M45,48 Q50,51 55,48" fill="none" stroke="var(--gold)" stroke-width="1.5"/></svg>`
+  };
+  iconEl.innerHTML = svgs[state.charType] || svgs.male;
+  const level = Math.ceil(state.day / 3);
+  levelEl.textContent = `LV.${level}`; dayEl.textContent = state.day;
+  const progress = (state.day - 1) / 29;
+  const offset = 119.38 - (119.38 * progress);
+  ringFill.style.strokeDashoffset = offset;
+  charWrap.classList.remove('level-high','level-max');
+  if(state.day >= 25) charWrap.classList.add('level-max');
+  else if(state.day >= 15) charWrap.classList.add('level-high');
+  ringFill.style.stroke = state.day >= 25 ? 'var(--green)' : 'var(--gold)';
+}
+
+// ==================== LOCALIZATION & INIT ====================
+function getUserLocale(){ const lang=navigator.language||navigator.userLanguage; if(lang.startsWith('en-GB'))return'GB'; if(lang.startsWith('en-CA'))return'CA'; return'US'; }
+function formatTime(hour){ const isUS=state.region!=='GB'; const h=hour%12||12; return isUS?`${h}:00 ${hour<12?'AM':'PM'}`:`${String(hour).padStart(2,'0')}:00`; }
+function localizeText(text){ if(!text) return ''; const c=LOCALE_CONFIG[state.region]; return text.replace(/\$50/g,c.currency+'50').replace(/\$10/g,c.currency+'10').replace(/\$15/g,c.currency+'15').replace(/\$1/g,c.currency+'1').replace(/\$200/g,c.currency+'200').replace(/\$300/g,c.currency+'300').replace(/\$400/g,c.currency+'400').replace(/\$500/g,c.currency+'500').replace(/\$100/g,c.currency+'100').replace(/\$89/g,c.currency+'89').replace(/\$147/g,c.currency+'147').replace(/\$180/g,c.currency+'180').replace(/\$340/g,c.currency+'340').replace(/\$487/g,c.currency+'487').replace(/\$2,400/g,c.currency+'2,400').replace(/\$6,000/g,c.currency+'6,000'); }
+function applyLocalization(){
+  const t08 = document.getElementById('time-08'), t12 = document.getElementById('time-12'), t20 = document.getElementById('time-20');
+  if(t08) t08.textContent = formatTime(8); if(t12) t12.textContent = formatTime(12); if(t20) t20.textContent = formatTime(20);
+}
+
+function initProtocol(){
+  const ni=document.getElementById('name-input'), name=ni.value.trim();
+  if(!name){ ni.style.borderBottomColor='#c0392b'; return; }
+  initAudio(); playBoot(); state.name=name.toUpperCase();
+  try{
+    const saved=localStorage.getItem('qw_state_'+state.name);
+    if(saved){
+      const s=JSON.parse(saved); state={...state,...s}; checkStreak();
+      if(state.region && state.charType){
+        selectedChar = state.charType; selectedRegion = state.region;
+        document.querySelector(`.char-card[data-char="${state.charType}"]`)?.classList.add('selected');
+        document.querySelector(`[data-region="${state.region}"]`)?.classList.add('selected');
+        checkCharReady();
+        document.getElementById('onboarding').style.display='flex';
+        return;
+      }
+    }
+  }catch(e){}
+  document.getElementById('onboarding').style.display='flex';
+}
+
+function checkStreak(){
+  const today=new Date().toDateString(), last=state.lastActive?new Date(state.lastActive).toDateString():null, yesterday=new Date(Date.now()-86400000).toDateString();
+  if(last===today) return;
+  if(last===yesterday){ state.streak++; showToast(`🔥 Streak: ${state.streak} days!`); }
+  else if(last&&last!==today){ state.streak=1; showToast(`⚠️ Streak reset.`); }
+  else { state.streak=1; }
+  state.lastActive=Date.now(); updateStreakBadge();
+}
+function updateStreakBadge(){ document.getElementById('streak-count').textContent=state.streak; }
+function runLoading(){
+  const msgs=["ESTABLISHING SOVEREIGNTY...","CLEANING SIGNAL...","HIDING ASSETS...","MAPPING FORTRESS...","CALIBRATING ARCHITECT...","PROTOCOL VERIFIED."];
+  let pct=0;
+  const bar=document.getElementById('load-bar'), status=document.getElementById('load-status'), pctEl=document.getElementById('load-pct');
+  const interval=setInterval(()=>{
+    pct+=2; bar.style.width=pct+'%'; pctEl.textContent=pct+'%';
+    const mi=Math.floor(pct/20); if(msgs[mi]) status.textContent=msgs[mi];
+    playTone(200+pct*3,'square',0.03,0.015);
+    if(pct>=100){
+      clearInterval(interval);
+      setTimeout(()=>{
+        showScreen('game');
+        setTimeout(()=>{ applyLocalization(); initGame(); startBackgroundMusic(); startActivityFeed(); renderHeaderChar(); resetIdleTimer(); }, 100);
+      }, 300);
+    }
+  }, 30);
+}
+
+// ==================== GAME LOGIC ====================
+function initGame(){
+  document.getElementById('hdr-name').textContent=state.name;
+  updateStats(false); loadDay(state.day); renderLeaderboard(); updateProgress(); animateLiveCount(); updateStreakBadge();
+  if(state.day>1) setTimeout(()=>showToast(`Welcome back, Architect. Day ${state.day} awaits.`),2000);
+}
+function loadDay(dayNum){
+  const day=DAYS.find(d=>d.day===dayNum)||DAYS[29];
+  state.stepsCompleted=[]; state.dayCompleted=false;
+  document.getElementById('complete-btn').disabled=true;
+  document.getElementById('day-num').textContent=String(dayNum).padStart(2,'0');
+  document.getElementById('day-title').textContent=day.title;
+  document.getElementById('day-protocol').textContent='QUIET MONEY PROTOCOL';
+  document.getElementById('mission-text').textContent=localizeText(day.mission);
+  document.getElementById('bonus-box').innerHTML=localizeText(day.bonus);
+  
+  // EDUCATIONAL
+  document.getElementById('edu-theory').textContent=day.theory||'';
+  document.getElementById('edu-task').innerHTML=day.task?`<strong>YOUR TASK:</strong> ${day.task}`:'';
+  document.getElementById('edu-tip').textContent=day.tip?`💡 ${day.tip}`:'';
+
+  const stepsEl=document.getElementById('steps-container'); stepsEl.innerHTML='';
+  day.steps.forEach((step,i)=>{
+    const el=document.createElement('div');
+    el.className='step'+(step.highlight?' step-highlight':'');
+    el.id='step-'+i;
+    el.innerHTML=`<div class="step-num">${String(i+1).padStart(2,'0')}</div><div class="step-content"><h4>${step.name}</h4><p>${localizeText(step.desc)}</p></div><div class="step-check" id="check-${i}">○</div>`;
+    el.onclick=()=>completeStep(i);
+    stepsEl.appendChild(el);
+  });
+  const timeEl=document.getElementById('timeline-container'); timeEl.innerHTML='';
+  day.timeline.forEach((t,i)=>{
+    const el=document.createElement('div'); el.className='time-item';
+    el.innerHTML=`<div class="time-label">${formatTime(parseInt(t.time))}</div><div class="time-action"><strong>${t.action}</strong></div>`;
+    timeEl.appendChild(el); setTimeout(()=>el.classList.add('active'),i*120);
+  });
+}
+function completeStep(idx){
+  if(state.stepsCompleted.includes(idx)) return;
+  playStep(); state.stepsCompleted.push(idx);
+  const step=document.getElementById('step-'+idx), check=document.getElementById('check-'+idx);
+  step.classList.add('completed'); check.textContent='✓';
+  spawnParticles(step);
+  const day=DAYS.find(d=>d.day===state.day);
+  if(state.stepsCompleted.length===day.steps.length){
+    document.getElementById('complete-btn').disabled=false;
+    document.getElementById('complete-btn').style.animation='pulse-border 1s infinite';
+  }
+}
+function completeDay(){
+  if(state.dayCompleted) return;
+  const day=DAYS.find(d=>d.day===state.day);
+  if(day.verificationGate&&day.verificationGate.required){ showVerificationGate(day); return; }
+  finalizeDay(day);
+}
+function finalizeDay(day){
+  state.dayCompleted=true; playSuccess();
+  document.getElementById('reward-day-num').textContent=String(state.day).padStart(2,'0');
+  document.getElementById('reward-title').textContent=day.title+' — COMPLETE';
+  document.getElementById('rwd-capital').textContent='+'+day.rewards.capital;
+  document.getElementById('rwd-focus').textContent='+'+day.rewards.focus;
+  document.getElementById('rwd-vitality').textContent='+'+day.rewards.vitality;
+  document.getElementById('rwd-sov').textContent='+'+day.rewards.sovereignty;
+  document.getElementById('reward-hint').textContent=`TYPE THE COMMAND WORD: "${day.command}"`;
+  document.getElementById('command-input').value='';
+  showScreen('reward');
+}
+function confirmCommand(){
+  const day=DAYS.find(d=>d.day===state.day), input=document.getElementById('command-input').value.trim().toUpperCase();
+  if(input!==day.command.toUpperCase()){ document.getElementById('command-input').style.borderBottomColor='#c0392b'; playError(); return; }
+  playSuccess();
+  state.capital=Math.min(100,state.capital+day.rewards.capital);
+  state.focus=Math.min(100,state.focus+day.rewards.focus);
+  state.vitality=Math.min(100,state.vitality+day.rewards.vitality);
+  state.sovereignty=Math.min(100,state.sovereignty+day.rewards.sovereignty);
+  state.score+=Object.values(day.rewards).reduce((a,b)=>a+b,0)*10;
+  if(day.verificationGate&&day.verificationGate.bonusReward){ Object.entries(day.verificationGate.bonusReward).forEach(([k,v])=>state[k]=Math.min(100,(state[k]||0)+v)); }
+  if(state.day<30&&!state.unlocked.includes(state.day+1)) state.unlocked.push(state.day+1);
+  showAchievement(day.achievement.title,day.achievement.desc);
+  saveState();
+  setTimeout(()=>{
+    if(state.day<30){ state.day++; showScreen('game'); updateStats(true); loadDay(state.day); updateProgress(); renderLeaderboard(); renderHeaderChar(); showToast('🎯 Next day unlocked!'); }
+    else { showAchievement('🏆 SOVEREIGN ARCHITECT','30 days complete. You are transformed.'); setTimeout(()=>{ alert('🎉 PROTOCOL COMPLETE\n\nYou are now a Sovereign Architect.'); location.reload(); },3000); }
+  },2000);
+}
+
+// ==================== VERIFICATION WITH OFFER BUTTON ====================
+async function showVerificationGate(day){
+  const modal = document.getElementById('verification-modal');
+  document.getElementById('vg-title').textContent = day.verificationGate.title;
+  document.getElementById('vg-desc').textContent = day.verificationGate.desc;
+  
+  const checks = document.getElementById('vg-checks'); checks.innerHTML = '';
+  day.verificationGate.checks.forEach(c => {
+    const el = document.createElement('div'); el.className = 'v-check'; el.textContent = c; checks.appendChild(el);
+  });
+
+  // Скрываем старые элементы
+  document.getElementById('vg-cta').style.display = 'none';
+  document.getElementById('vg-confirm').parentElement.style.display = 'none';
+  
+  // 📦 ФОРМИРУЕМ ССЫЛКУ С МЕТКАМИ ДЛЯ ТРЕКИНГА
+  const baseLink = day.verificationGate.cta?.link || '#';
+  const isLive = baseLink !== '#' && baseLink.startsWith('http');
+  let fullLink = baseLink;
+  
+  if(isLive){
+    try{
+      const url = new URL(baseLink);
+      url.searchParams.set('utm_source', 'quietwealth_protocol');
+      url.searchParams.set('utm_medium', 'verification_gate');
+      url.searchParams.set('utm_campaign', `day_${state.day}`);
+      url.searchParams.set('sub1', `architect_${state.name}`);
+      fullLink = url.toString();
+    }catch(e){}
+  }
+
+  // 🧱 СОБИРАЕМ UI: КНОПКА ОФФЕРА + EMAIL
+  const offerWrap = document.createElement('div');
+  offerWrap.style.cssText = 'margin-top:14px;text-align:center;';
+  offerWrap.innerHTML = `
+    <div style="font-size:9px;letter-spacing:0.3em;opacity:0.6;margin-bottom:8px;text-transform:uppercase">STEP 1: REGISTER ON THE PLATFORM</div>
+    <button id="vg-offer-btn" class="btn-primary" style="width:100%;margin-bottom:16px;font-size:11px;padding:14px;${!isLive?'opacity:0.4;pointer-events:none;':''}" 
+      onclick="${isLive ? `window.open('${fullLink}','_blank'); trackOfferClick('${day.verificationGate.cta.text.split(' ')[0]}', '${fullLink}')` : ''}">
+      🔗 ${isLive ? day.verificationGate.cta.text : 'OFFER LINK PENDING SETUP'}
+    </button>
+    
+    <div style="height:1px;background:var(--border);margin:12px 0"></div>
+    
+    <div style="font-size:9px;letter-spacing:0.3em;opacity:0.6;margin-bottom:8px;text-transform:uppercase">STEP 2: VERIFY YOUR REGISTRATION</div>
+    <div style="font-size:11px;color:var(--text-dim);margin-bottom:8px">Enter the exact email you used to register</div>
+    <input type="email" id="verify-email-input" placeholder="you@example.com" 
+      style="width:100%;padding:11px;background:rgba(255,255,255,0.04);border:1px solid var(--border);color:white;border-radius:6px;font-family:monospace;text-align:center;margin-bottom:10px;">
+    <div id="verify-status" style="min-height:18px;font-size:11px"></div>
+  `;
+  checks.appendChild(offerWrap);
+
+  // Кнопка подтверждения
+  const submitBtn = document.getElementById('vg-submit');
+  submitBtn.textContent = '⚡ VERIFY & UNLOCK BONUS';
+  submitBtn.disabled = false; submitBtn.classList.add('active'); submitBtn.style.opacity = '1';
+  
+  submitBtn.onclick = async () => {
+    const email = document.getElementById('verify-email-input').value.trim().toLowerCase();
+    const statusEl = document.getElementById('verify-status');
+    if(!email || !email.includes('@')){ statusEl.innerHTML = '<span style="color:var(--red)">⚠️ Enter a valid email</span>'; return; }
+
+    submitBtn.disabled = true; submitBtn.textContent = '🔄 VERIFYING...'; submitBtn.style.opacity = '0.6';
+    statusEl.innerHTML = '<span style="color:var(--gold)">🔍 Checking registration status...</span>';
+    await new Promise(r => setTimeout(r, 1100));
+    
+    // Сохраняем факт верификации
+    const key = `qw_verified_${state.name}_day${state.day}`;
+    localStorage.setItem(key, JSON.stringify({email, date: new Date().toISOString(), status: 'approved'}));
+    
+    statusEl.innerHTML = '<span style="color:var(--green)">✅ VERIFIED. BONUS AWARDED.</span>';
+    submitBtn.textContent = '✓ COMPLETE'; playSuccess();
+    
+    if(day.verificationGate.bonusReward){
+      Object.entries(day.verificationGate.bonusReward).forEach(([k,v]) => state[k] = Math.min(100, (state[k]||0) + v));
+      saveState(); updateStats(false);
+    }
+    
+    setTimeout(() => { modal.classList.remove('active'); finalizeDay(day); }, 900);
+  };
+  
+  modal.classList.add('active');
+  setTimeout(() => document.getElementById('verify-email-input')?.focus(), 200);
+}
+
+// 📊 ТРЕКЕР КЛИКОВ (Локально + готов для GA4/Mixpanel)
+function trackOfferClick(offerName, url){
+  let clicks = JSON.parse(localStorage.getItem('qw_offer_clicks') || '{}');
+  clicks[offerName] = (clicks[offerName] || 0) + 1;
+  localStorage.setItem('qw_offer_clicks', JSON.stringify(clicks));
+  console.log(`🔗 OFFER CLICK TRACKED: ${offerName} → ${url}`);
+  // Если добавишь GA4, просто раскомментируй:
+  // if(typeof gtag !== 'undefined') gtag('event', 'affiliate_click', {offer: offerName, day: state.day, url: url});
+}
+
+// ==================== MAP ====================
+function openMap(){ document.getElementById('day-view').style.display='none'; document.getElementById('map-section').style.display='block'; renderMap(); }
+function closeMap(){ document.getElementById('map-section').style.display='none'; document.getElementById('day-view').style.display='block'; }
+function renderMap(){
+  const container=document.getElementById('map-container'); container.innerHTML='';
+  const phases=[{label:'PHASE I — THE LEAK HUNT',color:'#00ff88',start:1,end:10},{label:'PHASE II — THE INVISIBLE ASSET',color:'#00b4d8',start:11,end:20},{label:'PHASE III — THE FORTRESS',color:'#ff4d4d',start:21,end:30}];
+  phases.forEach(ph=>{
+    const phDiv=document.createElement('div'); phDiv.className='phase-map';
+    phDiv.innerHTML=`<div class="phase-label" style="color:${ph.color}">${ph.label}</div><div class="days-grid"></div>`;
+    container.appendChild(phDiv); const grid=phDiv.querySelector('.days-grid');
+    for(let d=ph.start;d<=ph.end;d++){
+      const isDone=d<state.day, isCurrent=d===state.day, isLocked=!state.unlocked.includes(d);
+      const pill=document.createElement('div');
+      pill.className='day-pill '+(isDone?'done':isCurrent?'current':isLocked?'locked':'unlocked');
+      pill.textContent=(isDone?'✓ ':'')+'D'+String(d).padStart(2,'0')+' '+DAYS.find(x=>x.day===d).title.substring(0,11);
+      if(!isLocked&&d<=state.day) pill.onclick=()=>{ closeMap(); loadDay(d); };
+      grid.appendChild(pill);
+    }
+  });
+}
+
+// ==================== STATS & UI ====================
+function updateStats(animate){
+  ['capital','focus','vitality','sovereignty'].forEach(s=>{
+    const el=document.getElementById('val-'+s), bar=document.getElementById('bar-'+s);
+    if(animate) animateNumber(el,parseInt(el.textContent),state[s]); else el.textContent=state[s];
+    bar.style.width=state[s]+'%'; if(state[s]>=100) bar.classList.add('maxed'); else bar.classList.remove('maxed');
+  });
+  document.getElementById('banner-progress').style.width=((state.day-1)/30*100)+'%';
+  document.getElementById('banner-day').textContent=`Day ${state.day}/30`;
+}
+function animateNumber(el,from,to){ const diff=to-from, steps=25; let current=0; const interval=setInterval(()=>{ current++; el.textContent=Math.round(from+(diff*current/steps)); if(current>=steps){el.textContent=to;clearInterval(interval)} },20); }
+function updateProgress(){
+  document.getElementById('prog-day').textContent=state.day+' / 30';
+  document.getElementById('prog-score').textContent=state.score.toLocaleString();
+  document.getElementById('overall-progress').style.width=((state.day-1)/30*100)+'%';
+  document.getElementById('prog-rank').textContent='#'+(FAKE_PLAYERS.filter(p=>p.score>state.score).length+1);
+}
+function renderLeaderboard(){
+  const lb=document.getElementById('leaderboard'); const pe={name:state.name,day:state.day,score:state.score,isYou:true};
+  const all=[...FAKE_PLAYERS,pe].sort((a,b)=>b.score-a.score).slice(0,10); lb.innerHTML='';
+  all.forEach((p,i)=>{
+    const el=document.createElement('div'); el.className='lb-item'+(p.isYou?' lb-you':'');
+    el.innerHTML=`<div class="lb-rank ${i<3?'top':''}">${i<3?['🥇','','🥉'][i]:'#'+(i+1)}</div><div class="lb-avatar">${p.name.charAt(0)}</div><div class="lb-info"><div class="lb-name">${p.name}${p.isYou?' ◄ YOU':''}</div><div class="lb-day">DAY ${p.day}/30</div></div><div class="lb-score">${p.score.toLocaleString()}</div>`;
+    lb.appendChild(el);
+  });
+}
+function startActivityFeed(){
+  const feed=document.getElementById('activity-feed'); feed.innerHTML='';
+  for(let i=0;i<4;i++) addActivityItem(feed,Math.random()*2500);
+  setInterval(()=>{ if(document.getElementById('game').classList.contains('active')) addActivityItem(feed); },4000+Math.random()*2500);
+}
+function addActivityItem(container,delay=0){
+  const template=ACTIVITY_TEMPLATES[Math.floor(Math.random()*ACTIVITY_TEMPLATES.length)], action=template.actions[Math.floor(Math.random()*template.actions.length)], now=new Date(), timeStr=now.toLocaleTimeString('en-US',{hour:'2-digit',minute:'2-digit',hour12:true});
+  const el=document.createElement('div'); el.className='activity-item'+(template.type==='success'?' highlight':'');
+  const colors={success:'var(--green)',info:'var(--blue)',new:'var(--gold)'}, borderColor=colors[template.type]||'var(--border)';
+  el.innerHTML=`<div class="activity-avatar" style="border-color:${borderColor}">${template.name.charAt(0)}</div><div class="activity-content"><div class="activity-name">${template.name}</div><div class="activity-action">${action}</div><div class="activity-time">${timeStr}</div></div>`;
+  container.insertBefore(el,container.firstChild); while(container.children.length>7) container.removeChild(container.lastChild);
+}
+function startIntroLiveFeed(){
+  const feed=document.getElementById('intro-live-feed'), templates=['<span>MARCUS_V</span> completed Day 28','<span>ALEXK</span> earned: Ghost Mode','<span>IRON_WILL</span> advanced to Phase III','<span>NEWBLOOD</span> just started','<span>ECHO_NINE</span> deployed $350'];
+  let idx=0; function showNext(){ feed.innerHTML=templates[idx%templates.length]; idx++; setTimeout(showNext,3000+Math.random()*1200); } showNext();
+}
+function spawnIntroBadges(){
+  const badges=['🇺 Marcus Day 28','🇨🇦 Alex saved $147/mo','🇬 Iron activated VPN','🇺🇸 Silent_Oak Day 19','🇨 Zero_DB MOAT: $1,500'];
+  setInterval(()=>{ if(!document.getElementById('intro').classList.contains('active')) return; const badge=document.createElement('div'); badge.className='floating-badge'; badge.textContent=badges[Math.floor(Math.random()*badges.length)]; badge.style.left=(10+Math.random()*80)+'%'; badge.style.top=(20+Math.random()*60)+'%'; document.body.appendChild(badge); setTimeout(()=>badge.remove(),5500); },3500);
+}
+function spawnCoreParticles(){
+  const core=document.getElementById('secure-core'); if(!core) return;
+  const rect=core.getBoundingClientRect(); const cx=rect.left+rect.width/2, cy=rect.top+rect.height/2;
+  for(let i=0;i<4;i++){ const p=document.createElement('div'); p.className='core-particle'; const angle=Math.random()*Math.PI*2, r=25+Math.random()*35; p.style.cssText=`left:${cx+Math.cos(angle)*r}px;top:${cy+Math.sin(angle)*r}px;opacity:${0.3+Math.random()*0.5};animation:core-float 1.4s ease-out forwards`; document.body.appendChild(p); setTimeout(()=>p.remove(),1400); }
+}
+setInterval(spawnCoreParticles, 700);
+
+// ==================== ASSISTANT ====================
+function resetIdleTimer(){ clearTimeout(idleTimer); idleTimer = setTimeout(()=>{ if(document.getElementById('game').classList.contains('active')) showAssistantHint(); }, 25000); }
+document.addEventListener('click', resetIdleTimer);
+document.addEventListener('keydown', resetIdleTimer);
+document.addEventListener('scroll', resetIdleTimer);
+
+function showAssistantHint(){
+  const day = DAYS.find(d=>d.day===state.day);
+  if(!day || !day.assistantHint) return;
+  document.getElementById('assistant-msg').textContent = day.assistantHint;
+  document.getElementById('assistant-modal').classList.add('active');
+  playHint();
+}
+function toggleAssistant(){
+  const modal = document.getElementById('assistant-modal');
+  modal.classList.contains('active') ? modal.classList.remove('active') : showAssistantHint();
+}
+
+// ==================== UTILS ====================
+function showAchievement(title,desc){ const ach=document.getElementById('achievement'); document.getElementById('ach-title').textContent=title; document.getElementById('ach-desc').textContent=desc; ach.classList.add('show'); playAchievement(); setTimeout(()=>ach.classList.remove('show'),3500); }
+function showToast(text){ const t=document.getElementById('toast'); document.getElementById('toast-text').textContent=text; t.classList.add('show'); setTimeout(()=>t.classList.remove('show'),3500); }
+function showScreen(id){ document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active')); document.getElementById(id).classList.add('active'); }
+function spawnParticles(el){ const rect=el.getBoundingClientRect(); for(let i=0;i<10;i++){ const p=document.createElement('div'); p.className='particle'; const a=Math.random()*Math.PI*2, d=45+Math.random()*70; p.style.cssText=`left:${rect.left+rect.width/2}px;top:${rect.top+rect.height/2}px;--tx:${Math.cos(a)*d}px;--ty:${Math.sin(a)*d}px`; document.body.appendChild(p); setTimeout(()=>p.remove(),1100); } }
+function animateLiveCount(){ const el=document.getElementById('live-num'), onlineEl=document.getElementById('online-count'); setInterval(()=>{ const n=247+Math.floor(Math.random()*7)-3; el.textContent=n; onlineEl.textContent=n; },3000); }
+function saveState(){ try{ localStorage.setItem('qw_state_'+state.name,JSON.stringify(state)); }catch(e){} }
+
+// ==================== EVENTS ====================
+document.getElementById('command-input')?.addEventListener('input',(e)=>{ const day=DAYS.find(d=>d.day===state.day), match=e.target.value.trim().toUpperCase()===day?.command; e.target.style.borderBottomColor=match?'#00ff88':'var(--border)'; });
+document.addEventListener('keydown',(e)=>{ if(e.key==='Enter'&&document.activeElement.id!=='command-input'){ const btn=document.getElementById('complete-btn'); if(btn&&!btn.disabled) btn.click(); } });
+document.addEventListener('visibilitychange',()=>{ if(document.visibilityState==='hidden'){ saveState(); stopBackgroundMusic(); } else if(document.visibilityState==='visible'&&state.name){ initAudio(); if(document.getElementById('game').classList.contains('active')) startBackgroundMusic(); } });
+
+// START
+startIntroLiveFeed(); spawnIntroBadges();
+</script>
+</body>
+</html>
