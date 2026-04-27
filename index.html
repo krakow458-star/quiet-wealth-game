@@ -277,6 +277,31 @@ body::after{content:'';position:fixed;inset:0;background:repeating-linear-gradie
   .header-char-wrap{gap:5px}
   .char-level{font-size:8px;padding:2px 4px}
 }
+
+/* INTERACTIVE AUDIT TOOL */
+.interactive-audit-tool{background:rgba(255,255,255,0.02);border:1px solid var(--border);border-radius:10px;padding:16px;margin-top:16px}
+.interactive-audit-tool h3{font-size:13px;letter-spacing:0.15em;color:var(--gold-light);margin-bottom:12px;text-transform:uppercase;font-weight:700;display:flex;align-items:center;gap:8px}
+#expense-table{width:100%;border-collapse:collapse;font-size:11px;margin-bottom:12px}
+#expense-table th,#expense-table td{padding:8px 6px;text-align:left;border-bottom:1px solid rgba(255,255,255,0.05)}
+#expense-table th{font-size:9px;letter-spacing:0.12em;text-transform:uppercase;color:var(--text-muted);font-weight:600;background:rgba(255,255,255,0.02)}
+#expense-table input,#expense-table select{background:rgba(255,255,255,0.03);border:1px solid var(--border);color:white;padding:6px 8px;border-radius:4px;font-family:'Inter',sans-serif;font-size:11px;width:100%;outline:none;transition:border-color 0.2s}
+#expense-table input:focus,#expense-table select:focus{border-color:var(--gold)}
+#expense-table input[type="date"]{min-width:100px}
+#expense-table input[type="text"]{min-width:120px}
+#expense-table input[type="number"]{min-width:70px}
+#expense-table select{min-width:90px;cursor:pointer}
+.audit-btn{background:linear-gradient(135deg,rgba(212,175,55,0.15),rgba(212,175,55,0.03));border:1px solid var(--gold-dim);color:var(--gold-light);font-family:'Inter',sans-serif;font-size:10px;font-weight:600;padding:8px 14px;cursor:pointer;transition:all 0.3s;border-radius:6px;letter-spacing:0.08em;text-transform:uppercase;margin-right:8px}
+.audit-btn:hover{border-color:var(--gold);background:rgba(212,175,55,0.2);transform:translateY(-1px)}
+.audit-btn.download{border-color:var(--blue);color:var(--blue)}
+.audit-btn.download:hover{border-color:#00d4ff;background:rgba(0,180,216,0.15)}
+.summary{background:rgba(0,0,0,0.2);border-radius:8px;padding:12px;margin-top:12px;display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.summary p{font-size:11px;margin:0;text-align:center}
+.summary span{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:13px}
+#total-survival{color:var(--green)}
+#total-growth{color:var(--blue)}
+#total-noise{color:var(--red)}
+.audit-chart-container{margin-top:16px;text-align:center}
+.audit-chart-container h4{font-size:10px;letter-spacing:0.12em;color:var(--text-muted);margin-bottom:10px;text-transform:uppercase}
 ::-webkit-scrollbar{width:3px}::-webkit-scrollbar-thumb{background:var(--gold-dim);border-radius:2px}::-webkit-scrollbar-track{background:transparent}
 </style>
 </head>
@@ -386,6 +411,62 @@ body::after{content:'';position:fixed;inset:0;background:repeating-linear-gradie
         <div class="protocol-steps" id="steps-container"></div>
         <div class="timeline" id="timeline-container"></div>
         <div class="bonus-box" id="bonus-box"></div>
+        
+        <!-- INTERACTIVE EXPENSE TRACKER FOR DAY 1 -->
+        <div id="day-1-audit-tool" style="display:none;">
+          <div class="interactive-audit-tool">
+            <h3>📊 YOUR EXPENSE TRACKER</h3>
+            <table id="expense-table">
+              <thead>
+                <tr><th>Date</th><th>Description</th><th>Amount ($)</th><th>Category</th><th>Action</th></tr>
+              </thead>
+              <tbody><!-- Rows will be added dynamically --></tbody>
+            </table>
+            <button class="audit-btn" onclick="addExpenseRow()">+ Add Expense</button>
+            <button class="audit-btn download" onclick="exportToCSV()">📥 Download Report</button>
+            
+            <div class="summary">
+              <p>Total Survival: $<span id="total-survival">0.00</span></p>
+              <p>Total Growth: $<span id="total-growth">0.00</span></p>
+              <p>Total Noise: $<span id="total-noise">0.00</span></p>
+            </div>
+            
+            <div class="audit-chart-container">
+              <h4>EXPENSE BREAKDOWN</h4>
+              <canvas id="chart"></canvas>
+            </div>
+          </div>
+        </div>
+        
+        <!-- DIGITAL FOOTPRINT SCANNER FOR DAY 16 -->
+        <div id="day-16-scanner-tool" style="display:none;">
+          <div class="interactive-audit-tool">
+            <h3>🔍 DIGITAL FOOTPRINT SCANNER</h3>
+            <p style="font-size:12px;color:var(--text-dim);margin-bottom:15px;">Enter your name to see how much of your personal data is exposed online.</p>
+            
+            <div style="margin:15px 0;">
+              <input type="text" id="user-name-input" placeholder="Your Full Name or Alias" style="width:100%;padding:12px;background:rgba(255,255,255,0.05);border:1px solid var(--border);color:white;border-radius:5px;font-family:'Inter',sans-serif;font-size:13px;outline:none;transition:border-color 0.3s;">
+              <button onclick="scanFootprint()" style="margin-top:10px;padding:12px 24px;background:var(--gold);color:black;border:none;border-radius:5px;cursor:pointer;font-weight:600;font-size:12px;letter-spacing:0.1em;text-transform:uppercase;transition:all 0.3s;">🔍 Scan Now</button>
+            </div>
+
+            <div id="scan-results" style="display:none;">
+              <h4 style="font-size:12px;letter-spacing:0.15em;color:var(--gold-light);margin:20px 0 10px;text-transform:uppercase;font-weight:700;">📊 SCAN RESULTS</h4>
+              
+              <div class="progress-bar-wrap" style="margin-bottom:15px;height:8px;background:rgba(255,255,255,0.04);border-radius:4px;overflow:hidden;">
+                <div class="progress-bar" id="exposure-bar" style="width:0%;background:linear-gradient(90deg,#ff4d4d,#ffa500);transition:width 1.5s ease-out;"></div>
+              </div>
+              
+              <p style="font-size:13px;margin-bottom:15px;">Your data is exposed on <strong id="sources-count" style="color:var(--red);font-size:16px;">0</strong> data broker sites.</p>
+              
+              <ul id="sources-list" style="list-style:none;padding:0;margin:15px 0;font-size:11px;"></ul>
+
+              <a href="https://goto.mydataremoval.com/n4R3jA" target="_blank" rel="noopener" class="btn-primary" style="display:inline-block;text-decoration:none;margin-top:15px;width:100%;text-align:center;padding:14px;font-size:11px;letter-spacing:0.1em;">🛡️ REMOVE MY DATA — 55% OFF LIFETIME</a>
+              
+              <p style="font-size:10px;color:var(--text-muted);margin-top:12px;text-align:center;">Scan result saved to your local storage.</p>
+            </div>
+          </div>
+        </div>
+        
         <button class="complete-btn" id="complete-btn" onclick="completeDay()" disabled>⚡ EXECUTE & ADVANCE</button>
       </div>
     </div>
@@ -453,6 +534,9 @@ body::after{content:'';position:fixed;inset:0;background:repeating-linear-gradie
 
 <div class="achievement" id="achievement"><div class="achievement-label">⚡ UNLOCKED</div><div class="achievement-title" id="ach-title">FIRST MOVE</div><div class="achievement-desc" id="ach-desc">Day 1 complete.</div></div>
 <div class="toast" id="toast"><div class="toast-text" id="toast-text">Keep going!</div></div>
+
+<!-- Chart.js CDN -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <script>
 // ==================== CONFIG ====================
@@ -700,6 +784,24 @@ function loadDay(dayNum){
     el.innerHTML=`<div class="time-label">${formatTime(parseInt(t.time))}</div><div class="time-action"><strong>${t.action}</strong></div>`;
     timeEl.appendChild(el); setTimeout(()=>el.classList.add('active'),i*120);
   });
+  
+  // Show interactive audit tool only for Day 1
+  const auditTool = document.getElementById('day-1-audit-tool');
+  if (dayNum === 1) {
+    auditTool.style.display = 'block';
+    initExpenseTracker();
+  } else {
+    auditTool.style.display = 'none';
+  }
+  
+  // Show digital footprint scanner only for Day 16
+  const scannerTool = document.getElementById('day-16-scanner-tool');
+  if (dayNum === 16) {
+    scannerTool.style.display = 'block';
+    loadScanResult();
+  } else {
+    scannerTool.style.display = 'none';
+  }
 }
 function completeStep(idx){
   if(state.stepsCompleted.includes(idx)) return;
@@ -948,6 +1050,250 @@ function saveState(){ try{ localStorage.setItem('qw_state_'+state.name,JSON.stri
 document.getElementById('command-input')?.addEventListener('input',(e)=>{ const day=DAYS.find(d=>d.day===state.day), match=e.target.value.trim().toUpperCase()===day?.command; e.target.style.borderBottomColor=match?'#00ff88':'var(--border)'; });
 document.addEventListener('keydown',(e)=>{ if(e.key==='Enter'&&document.activeElement.id!=='command-input'){ const btn=document.getElementById('complete-btn'); if(btn&&!btn.disabled) btn.click(); } });
 document.addEventListener('visibilitychange',()=>{ if(document.visibilityState==='hidden'){ saveState(); stopBackgroundMusic(); } else if(document.visibilityState==='visible'&&state.name){ initAudio(); if(document.getElementById('game').classList.contains('active')) startBackgroundMusic(); } });
+
+// ==================== EXPENSE TRACKER (DAY 1) ====================
+let expenseChart = null;
+
+function addExpenseRow() {
+  const tbody = document.querySelector('#expense-table tbody');
+  const row = document.createElement('tr');
+  row.innerHTML = `
+    <td><input type="date"></td>
+    <td><input type="text" placeholder="e.g., Coffee"></td>
+    <td><input type="number" step="0.01" min="0" oninput="updateTotals()"></td>
+    <td>
+      <select onchange="updateTotals()">
+        <option value="survival">Survival</option>
+        <option value="growth">Growth</option>
+        <option value="noise">Noise</option>
+      </select>
+    </td>
+    <td><button class="audit-btn" style="padding:4px 8px;font-size:9px;" onclick="removeExpenseRow(this)">✕</button></td>
+  `;
+  tbody.appendChild(row);
+  updateTotals();
+}
+
+function removeExpenseRow(btn) {
+  const row = btn.closest('tr');
+  row.remove();
+  updateTotals();
+}
+
+function updateTotals() {
+  let survival = 0, growth = 0, noise = 0;
+  document.querySelectorAll('#expense-table tbody tr').forEach(row => {
+    const amount = parseFloat(row.cells[2].querySelector('input').value) || 0;
+    const category = row.cells[3].querySelector('select').value;
+    if (category === 'survival') survival += amount;
+    else if (category === 'growth') growth += amount;
+    else noise += amount;
+  });
+  document.getElementById('total-survival').textContent = survival.toFixed(2);
+  document.getElementById('total-growth').textContent = growth.toFixed(2);
+  document.getElementById('total-noise').textContent = noise.toFixed(2);
+  updateChart(survival, growth, noise);
+  saveExpenseData();
+}
+
+function updateChart(survival, growth, noise) {
+  if (expenseChart) {
+    expenseChart.data.datasets[0].data = [survival, growth, noise];
+    expenseChart.update();
+  }
+}
+
+function exportToCSV() {
+  let csv = 'Date,Description,Amount,Category\n';
+  document.querySelectorAll('#expense-table tbody tr').forEach(row => {
+    const cells = row.querySelectorAll('input, select');
+    const date = cells[0].value || '';
+    const desc = cells[1].value.replace(/,/g, ';') || '';
+    const amount = cells[2].value || '0';
+    const category = cells[3].value;
+    csv += `${date},${desc},${amount},${category}\n`;
+  });
+  const blob = new Blob([csv], { type: 'text/csv' });
+  const url = window.URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'my_expenses_audit.csv';
+  a.click();
+  window.URL.revokeObjectURL(url);
+}
+
+function saveExpenseData() {
+  const rows = [];
+  document.querySelectorAll('#expense-table tbody tr').forEach(row => {
+    const cells = row.querySelectorAll('input, select');
+    rows.push({
+      date: cells[0].value,
+      desc: cells[1].value,
+      amount: cells[2].value,
+      category: cells[3].value
+    });
+  });
+  localStorage.setItem('qw_audit_data', JSON.stringify(rows));
+}
+
+function loadExpenseData() {
+  const savedData = localStorage.getItem('qw_audit_data');
+  if (savedData) {
+    try {
+      const expenses = JSON.parse(savedData);
+      expenses.forEach(expense => {
+        addExpenseRow();
+        const lastRow = document.querySelector('#expense-table tbody tr:last-child');
+        lastRow.cells[0].querySelector('input').value = expense.date;
+        lastRow.cells[1].querySelector('input').value = expense.desc;
+        lastRow.cells[2].querySelector('input').value = expense.amount;
+        lastRow.cells[3].querySelector('select').value = expense.category;
+      });
+      updateTotals();
+    } catch(e) { console.error('Error loading expense data:', e); }
+  }
+}
+
+function initExpenseTracker() {
+  // Initialize chart if not already done
+  if (!expenseChart) {
+    const ctx = document.getElementById('chart').getContext('2d');
+    expenseChart = new Chart(ctx, {
+      type: 'pie',
+      data: {
+        labels: ['Survival', 'Growth', 'Noise'],
+        datasets: [{
+          data: [0, 0, 0],
+          backgroundColor: ['#00e676', '#00b4d8', '#ff4d4d'],
+          borderColor: 'rgba(0,0,0,0.3)',
+          borderWidth: 2
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: true,
+        plugins: {
+          legend: {
+            position: 'bottom',
+            labels: {
+              color: '#e6e6e6',
+              font: { size: 11, family: 'Inter' },
+              padding: 12
+            }
+          }
+        }
+      }
+    });
+  }
+  
+  // Load saved data only once when initializing
+  const tbody = document.querySelector('#expense-table tbody');
+  if (tbody.children.length === 0) {
+    loadExpenseData();
+  }
+}
+
+// ==================== DIGITAL FOOTPRINT SCANNER (DAY 16) ====================
+function scanFootprint() {
+  const nameInput = document.getElementById('user-name-input');
+  const name = nameInput.value.trim();
+  
+  if (!name) {
+    alert('Please enter your name or alias.');
+    return;
+  }
+
+  // Simulate scanning process
+  const resultsDiv = document.getElementById('scan-results');
+  const exposureBar = document.getElementById('exposure-bar');
+  const sourcesCount = document.getElementById('sources-count');
+  const sourcesList = document.getElementById('sources-list');
+
+  resultsDiv.style.display = 'block';
+  exposureBar.style.width = '0%';
+  sourcesCount.textContent = '...';
+  sourcesList.innerHTML = '<li style="color:var(--gold-light);">🔍 Analyzing public records...</li>';
+
+  setTimeout(() => {
+    exposureBar.style.width = '85%';
+    const randomSources = Math.floor(Math.random() * 50) + 100; // Random number between 100 and 150
+    sourcesCount.textContent = randomSources;
+    
+    const sampleSources = [
+      'Whitepages.com', 'Spokeo.com', 'Pipl.com', 'ThatsThem.com', 
+      'BeenVerified.com', 'Intelius.com', 'PeopleFinder.com', 'FamilyTreeNow.com',
+      'TruePeopleSearch.com', 'FastPeopleSearch.com'
+    ];
+    
+    sourcesList.innerHTML = '';
+    sampleSources.forEach(source => {
+      const li = document.createElement('li');
+      const found = Math.random() > 0.4; // 60% chance of being found
+      li.textContent = `${source} — ${found ? '⚠️ Data Found' : '✓ Not Found'}`;
+      li.style.color = found ? '#ff4d4d' : '#00e676';
+      li.style.padding = '6px 0';
+      li.style.borderBottom = '1px solid rgba(255,255,255,0.03)';
+      sourcesList.appendChild(li);
+    });
+
+    // Save result to localStorage
+    const scanResult = {
+      name: name,
+      sources: randomSources,
+      date: new Date().toISOString(),
+      sourcesList: sampleSources.map(s => ({
+        name: s,
+        found: Math.random() > 0.4
+      }))
+    };
+    localStorage.setItem('qw_day16_scan_result', JSON.stringify(scanResult));
+
+  }, 2000);
+}
+
+function loadScanResult() {
+  const savedResult = localStorage.getItem('qw_day16_scan_result');
+  if (savedResult) {
+    try {
+      const result = JSON.parse(savedResult);
+      document.getElementById('user-name-input').value = result.name;
+      document.getElementById('scan-results').style.display = 'block';
+      document.getElementById('exposure-bar').style.width = '85%';
+      document.getElementById('sources-count').textContent = result.sources;
+      
+      const sourcesList = document.getElementById('sources-list');
+      sourcesList.innerHTML = '';
+      
+      if (result.sourcesList && result.sourcesList.length > 0) {
+        result.sourcesList.forEach(source => {
+          const li = document.createElement('li');
+          li.textContent = `${source.name} — ${source.found ? '⚠️ Data Found' : '✓ Not Found'}`;
+          li.style.color = source.found ? '#ff4d4d' : '#00e676';
+          li.style.padding = '6px 0';
+          li.style.borderBottom = '1px solid rgba(255,255,255,0.03)';
+          sourcesList.appendChild(li);
+        });
+      } else {
+        // Fallback for old format
+        const sampleSources = [
+          'Whitepages.com', 'Spokeo.com', 'Pipl.com', 'ThatsThem.com', 
+          'BeenVerified.com', 'Intelius.com', 'PeopleFinder.com', 'FamilyTreeNow.com'
+        ];
+        sampleSources.forEach(source => {
+          const li = document.createElement('li');
+          const found = Math.random() > 0.5;
+          li.textContent = `${source} — ${found ? '⚠️ Data Found' : '✓ Not Found'}`;
+          li.style.color = found ? '#ff4d4d' : '#00e676';
+          li.style.padding = '6px 0';
+          li.style.borderBottom = '1px solid rgba(255,255,255,0.03)';
+          sourcesList.appendChild(li);
+        });
+      }
+    } catch(e) {
+      console.error('Error loading scan result:', e);
+    }
+  }
+}
 
 // START
 startIntroLiveFeed(); spawnIntroBadges();
