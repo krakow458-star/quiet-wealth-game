@@ -48,10 +48,14 @@ body::after{content:'';position:fixed;inset:0;background:repeating-linear-gradie
 @keyframes core-spin{to{transform:rotate(360deg)}}@keyframes core-breathe{0%,100%{transform:scale(0.8);opacity:0.6}50%{transform:scale(1.08);opacity:1}}@keyframes core-float{0%{transform:scale(1);opacity:1}100%{transform:scale(0) translateY(-18px);opacity:0}}
 
 /* CHARACTER SELECT */
-.char-select-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin:14px 0}
+.avatar-selection-container{display:flex;flex-direction:column;gap:16px;margin:14px 0}
+.gender-section h3.gender-title{font-size:9px;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);opacity:0.8;margin-bottom:8px;text-align:center}
+.char-select-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
 .char-card{background:rgba(255,255,255,0.03);border:1px solid var(--border);padding:12px 8px;cursor:pointer;transition:all .3s var(--ease-out);border-radius:10px;text-align:center;position:relative;overflow:hidden}
+.char-card.male{border-top:2px solid rgba(0,180,216,0.3)}
+.char-card.female{border-top:2px solid rgba(212,175,55,0.3)}
 .char-card:hover{border-color:var(--gold);transform:translateY(-2px)}.char-card.selected{border-color:var(--green);background:rgba(0,230,118,.08);box-shadow:0 0 18px rgba(0,230,118,.15)}.char-card.selected::after{content:'✓';position:absolute;top:7px;right:8px;color:var(--green);font-size:10px;font-weight:700}
-.char-preview{width:55px;height:55px;margin:0 auto 6px}.char-name{font-size:10px;letter-spacing:.25em;text-transform:uppercase;font-weight:600;opacity:.8}.char-role{font-size:8px;opacity:.4;margin-top:2px;letter-spacing:.15em}
+.char-preview{width:55px;height:55px;margin:0 auto 6px}.char-name{font-size:9px;letter-spacing:.25em;text-transform:uppercase;font-weight:600;opacity:.8;margin-top:4px}.char-role{font-size:7px;opacity:.4;margin-top:3px;letter-spacing:.15em;line-height:1.3}
 
 /* HEADER CHARACTER & PROGRESS */
 .header-char-wrap{display:flex;align-items:center;gap:8px;margin-left:auto;margin-right:6px}.header-char{position:relative;width:42px;height:42px;flex-shrink:0}
@@ -308,26 +312,85 @@ body::after{content:'';position:fixed;inset:0;background:repeating-linear-gradie
 <!-- ONBOARDING -->
 <div id="onboarding" class="modal">
   <div class="modal-content">
-    <div class="modal-title">◈ SELECT YOUR ARCHETYPE</div>
+    <div class="modal-title">◈ SELECT YOUR AVATAR</div>
     <p class="modal-text">Choose your visual identity. Progress will be tracked around it.</p>
-    <div class="char-select-grid">
-      <div class="char-card" data-char="male1" onclick="selectChar('male1')">
-        <div class="char-preview"><svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="mGrad1" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#d4af37"/><stop offset="100%" stop-color="#8a6e1a"/></linearGradient></defs><circle cx="50" cy="45" r="22" fill="#0a0a0f" stroke="url(#mGrad1)" stroke-width="2"/><path d="M38,55 Q50,75 62,55 L62,85 L38,85Z" fill="#0a0a0f" stroke="url(#mGrad1)" stroke-width="2"/><rect x="42" y="60" width="16" height="12" rx="2" fill="none" stroke="#d4af37" stroke-width="1.5"/><circle cx="44" cy="42" r="3" fill="#d4af37"/><circle cx="56" cy="42" r="3" fill="#d4af37"/><path d="M44,48 Q50,52 56,48" fill="none" stroke="#d4af37" stroke-width="1.5"/></svg></div>
-        <div class="char-name">ARCHITECT</div><div class="char-role">MALE TYPE 1</div>
+    
+    <div class="avatar-selection-container">
+      <!-- MEN SECTION -->
+      <div class="gender-section">
+        <h3 class="gender-title">MEN</h3>
+        <div class="char-select-grid">
+          <div class="char-card male" data-char="male1" onclick="selectChar('male1')">
+            <div class="char-preview">
+              <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                <defs><linearGradient id="mGrad1" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#d4af37"/><stop offset="100%" stop-color="#8a6e1a"/></linearGradient></defs>
+                <circle cx="50" cy="45" r="22" fill="#0a0a0f" stroke="url(#mGrad1)" stroke-width="2"/>
+                <path d="M38,55 Q50,75 62,55 L62,85 L38,85Z" fill="#0a0a0f" stroke="url(#mGrad1)" stroke-width="2"/>
+                <rect x="42" y="60" width="16" height="12" rx="2" fill="none" stroke="#d4af37" stroke-width="1.5"/>
+                <circle cx="44" cy="42" r="3" fill="#d4af37"/>
+                <circle cx="56" cy="42" r="3" fill="#d4af37"/>
+                <path d="M44,48 Q50,52 56,48" fill="none" stroke="#d4af37" stroke-width="1.5"/>
+              </svg>
+            </div>
+            <div class="char-name">THE STRATEGIST</div>
+            <div class="char-role">Calculated moves, steady growth</div>
+          </div>
+          <div class="char-card male" data-char="male2" onclick="selectChar('male2')">
+            <div class="char-preview">
+              <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                <defs><linearGradient id="mGrad2" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#d4af37"/><stop offset="100%" stop-color="#8a6e1a"/></linearGradient></defs>
+                <circle cx="50" cy="45" r="22" fill="#0a0a0f" stroke="url(#mGrad2)" stroke-width="2"/>
+                <path d="M38,55 Q50,75 62,55 L62,85 L38,85Z" fill="#0a0a0f" stroke="url(#mGrad2)" stroke-width="2"/>
+                <path d="M42,60 L50,72 L58,60 Z" fill="none" stroke="#d4af37" stroke-width="1.5"/>
+                <circle cx="44" cy="42" r="3" fill="#d4af37"/>
+                <circle cx="56" cy="42" r="3" fill="#d4af37"/>
+                <line x1="44" y1="48" x2="56" y2="48" stroke="#d4af37" stroke-width="1.5"/>
+              </svg>
+            </div>
+            <div class="char-name">THE VISIONARY</div>
+            <div class="char-role">Long-term thinking, bold investments</div>
+          </div>
+        </div>
       </div>
-      <div class="char-card" data-char="male2" onclick="selectChar('male2')">
-        <div class="char-preview"><svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="mGrad2" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#d4af37"/><stop offset="100%" stop-color="#8a6e1a"/></linearGradient></defs><circle cx="50" cy="45" r="22" fill="#0a0a0f" stroke="url(#mGrad2)" stroke-width="2"/><path d="M38,55 Q50,75 62,55 L62,85 L38,85Z" fill="#0a0a0f" stroke="url(#mGrad2)" stroke-width="2"/><rect x="42" y="60" width="16" height="12" rx="2" fill="none" stroke="#d4af37" stroke-width="1.5"/><circle cx="44" cy="42" r="3" fill="#d4af37"/><circle cx="56" cy="42" r="3" fill="#d4af37"/><path d="M44,48 Q50,52 56,48" fill="none" stroke="#d4af37" stroke-width="1.5"/></svg></div>
-        <div class="char-name">ARCHITECT</div><div class="char-role">MALE TYPE 2</div>
-      </div>
-      <div class="char-card" data-char="female1" onclick="selectChar('female1')">
-        <div class="char-preview"><svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="fGrad1" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#d4af37"/><stop offset="100%" stop-color="#8a6e1a"/></linearGradient></defs><circle cx="50" cy="45" r="22" fill="#0a0a0f" stroke="url(#fGrad1)" stroke-width="2"/><path d="M38,55 Q50,70 62,55 L62,85 L38,85Z" fill="#0a0a0f" stroke="url(#fGrad1)" stroke-width="2"/><path d="M40,35 Q35,25 45,30 M60,35 Q65,25 55,30" fill="none" stroke="#d4af37" stroke-width="1.5"/><circle cx="44" cy="42" r="3" fill="#d4af37"/><circle cx="56" cy="42" r="3" fill="#d4af37"/><path d="M45,48 Q50,51 55,48" fill="none" stroke="#d4af37" stroke-width="1.5"/></svg></div>
-        <div class="char-name">ARCHITECT</div><div class="char-role">FEMALE TYPE 1</div>
-      </div>
-      <div class="char-card" data-char="female2" onclick="selectChar('female2')">
-        <div class="char-preview"><svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="fGrad2" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#d4af37"/><stop offset="100%" stop-color="#8a6e1a"/></linearGradient></defs><circle cx="50" cy="45" r="22" fill="#0a0a0f" stroke="url(#fGrad2)" stroke-width="2"/><path d="M38,55 Q50,70 62,55 L62,85 L38,85Z" fill="#0a0a0f" stroke="url(#fGrad2)" stroke-width="2"/><path d="M40,35 Q35,25 45,30 M60,35 Q65,25 55,30" fill="none" stroke="#d4af37" stroke-width="1.5"/><circle cx="44" cy="42" r="3" fill="#d4af37"/><circle cx="56" cy="42" r="3" fill="#d4af37"/><path d="M45,48 Q50,51 55,48" fill="none" stroke="#d4af37" stroke-width="1.5"/></svg></div>
-        <div class="char-name">ARCHITECT</div><div class="char-role">FEMALE TYPE 2</div>
+      
+      <!-- WOMEN SECTION -->
+      <div class="gender-section">
+        <h3 class="gender-title">WOMEN</h3>
+        <div class="char-select-grid">
+          <div class="char-card female" data-char="female1" onclick="selectChar('female1')">
+            <div class="char-preview">
+              <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                <defs><linearGradient id="fGrad1" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#d4af37"/><stop offset="100%" stop-color="#8a6e1a"/></linearGradient></defs>
+                <circle cx="50" cy="45" r="22" fill="#0a0a0f" stroke="url(#fGrad1)" stroke-width="2"/>
+                <path d="M38,55 Q50,70 62,55 L62,85 L38,85Z" fill="#0a0a0f" stroke="url(#fGrad1)" stroke-width="2"/>
+                <path d="M40,35 Q35,25 45,30 M60,35 Q65,25 55,30" fill="none" stroke="#d4af37" stroke-width="1.5"/>
+                <circle cx="44" cy="42" r="3" fill="#d4af37"/>
+                <circle cx="56" cy="42" r="3" fill="#d4af37"/>
+                <path d="M45,48 Q50,51 55,48" fill="none" stroke="#d4af37" stroke-width="1.5"/>
+              </svg>
+            </div>
+            <div class="char-name">THE ARCHITECT</div>
+            <div class="char-role">Building empires with precision</div>
+          </div>
+          <div class="char-card female" data-char="female2" onclick="selectChar('female2')">
+            <div class="char-preview">
+              <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                <defs><linearGradient id="fGrad2" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#d4af37"/><stop offset="100%" stop-color="#8a6e1a"/></linearGradient></defs>
+                <circle cx="50" cy="45" r="22" fill="#0a0a0f" stroke="url(#fGrad2)" stroke-width="2"/>
+                <path d="M38,55 Q50,70 62,55 L62,85 L38,85Z" fill="#0a0a0f" stroke="url(#fGrad2)" stroke-width="2"/>
+                <path d="M35,40 Q50,25 65,40 Q65,50 50,45 Q35,50 35,40" fill="none" stroke="#d4af37" stroke-width="1.5"/>
+                <circle cx="44" cy="42" r="3" fill="#d4af37"/>
+                <circle cx="56" cy="42" r="3" fill="#d4af37"/>
+                <path d="M45,48 Q50,51 55,48" fill="none" stroke="#d4af37" stroke-width="1.5"/>
+              </svg>
+            </div>
+            <div class="char-name">THE INNOVATOR</div>
+            <div class="char-role">Disrupting markets, creating value</div>
+          </div>
+        </div>
       </div>
     </div>
+    
     <button class="btn-primary" id="confirm-char-btn" onclick="confirmCharSelection()" disabled style="margin-top:12px;width:100%">⚡ CONFIRM & LAUNCH</button>
   </div>
 </div>
