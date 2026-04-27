@@ -302,7 +302,7 @@ body::after{content:'';position:fixed;inset:0;background:repeating-linear-gradie
   </div>
   <div class="live-count"><span>●</span> <span id="live-num">247</span> ARCHITECTS ACTIVE GLOBALLY</div>
   <div class="live-feed" id="intro-live-feed"></div>
-  <div style="margin-top:10px;font-size:8px;opacity:0.35">🇺 🇨 🇧 Protocol optimized</div>
+  <div style="margin-top:10px;font-size:8px;opacity:0.35">Protocol optimized</div>
 </div>
 
 <!-- ONBOARDING -->
@@ -311,21 +311,21 @@ body::after{content:'';position:fixed;inset:0;background:repeating-linear-gradie
     <div class="modal-title">◈ SELECT YOUR ARCHETYPE</div>
     <p class="modal-text">Choose your visual identity. Progress will be tracked around it.</p>
     <div class="char-select-grid">
-      <div class="char-card" data-char="male" onclick="selectChar('male')">
-        <div class="char-preview"><svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="mGrad" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#d4af37"/><stop offset="100%" stop-color="#8a6e1a"/></linearGradient></defs><circle cx="50" cy="45" r="22" fill="#0a0a0f" stroke="url(#mGrad)" stroke-width="2"/><path d="M38,55 Q50,75 62,55 L62,85 L38,85Z" fill="#0a0a0f" stroke="url(#mGrad)" stroke-width="2"/><rect x="42" y="60" width="16" height="12" rx="2" fill="none" stroke="#d4af37" stroke-width="1.5"/><circle cx="44" cy="42" r="3" fill="#d4af37"/><circle cx="56" cy="42" r="3" fill="#d4af37"/><path d="M44,48 Q50,52 56,48" fill="none" stroke="#d4af37" stroke-width="1.5"/></svg></div>
-        <div class="char-name">ARCHITECT</div><div class="char-role">MALE</div>
+      <div class="char-card" data-char="male1" onclick="selectChar('male1')">
+        <div class="char-preview"><svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="mGrad1" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#d4af37"/><stop offset="100%" stop-color="#8a6e1a"/></linearGradient></defs><circle cx="50" cy="45" r="22" fill="#0a0a0f" stroke="url(#mGrad1)" stroke-width="2"/><path d="M38,55 Q50,75 62,55 L62,85 L38,85Z" fill="#0a0a0f" stroke="url(#mGrad1)" stroke-width="2"/><rect x="42" y="60" width="16" height="12" rx="2" fill="none" stroke="#d4af37" stroke-width="1.5"/><circle cx="44" cy="42" r="3" fill="#d4af37"/><circle cx="56" cy="42" r="3" fill="#d4af37"/><path d="M44,48 Q50,52 56,48" fill="none" stroke="#d4af37" stroke-width="1.5"/></svg></div>
+        <div class="char-name">ARCHITECT</div><div class="char-role">MALE TYPE 1</div>
       </div>
-      <div class="char-card" data-char="female" onclick="selectChar('female')">
-        <div class="char-preview"><svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="fGrad" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#d4af37"/><stop offset="100%" stop-color="#8a6e1a"/></linearGradient></defs><circle cx="50" cy="45" r="22" fill="#0a0a0f" stroke="url(#fGrad)" stroke-width="2"/><path d="M38,55 Q50,70 62,55 L62,85 L38,85Z" fill="#0a0a0f" stroke="url(#fGrad)" stroke-width="2"/><path d="M40,35 Q35,25 45,30 M60,35 Q65,25 55,30" fill="none" stroke="#d4af37" stroke-width="1.5"/><circle cx="44" cy="42" r="3" fill="#d4af37"/><circle cx="56" cy="42" r="3" fill="#d4af37"/><path d="M45,48 Q50,51 55,48" fill="none" stroke="#d4af37" stroke-width="1.5"/></svg></div>
-        <div class="char-name">ARCHITECT</div><div class="char-role">FEMALE</div>
+      <div class="char-card" data-char="male2" onclick="selectChar('male2')">
+        <div class="char-preview"><svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="mGrad2" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#d4af37"/><stop offset="100%" stop-color="#8a6e1a"/></linearGradient></defs><circle cx="50" cy="45" r="22" fill="#0a0a0f" stroke="url(#mGrad2)" stroke-width="2"/><path d="M38,55 Q50,75 62,55 L62,85 L38,85Z" fill="#0a0a0f" stroke="url(#mGrad2)" stroke-width="2"/><rect x="42" y="60" width="16" height="12" rx="2" fill="none" stroke="#d4af37" stroke-width="1.5"/><circle cx="44" cy="42" r="3" fill="#d4af37"/><circle cx="56" cy="42" r="3" fill="#d4af37"/><path d="M44,48 Q50,52 56,48" fill="none" stroke="#d4af37" stroke-width="1.5"/></svg></div>
+        <div class="char-name">ARCHITECT</div><div class="char-role">MALE TYPE 2</div>
       </div>
-    </div>
-    <div style="margin-top:10px;border-top:1px solid var(--border);padding-top:10px">
-      <div class="modal-title" style="font-size:14px;margin-bottom:5px">◈ REGION</div>
-      <div class="modal-options" style="flex-direction:row;flex-wrap:wrap;justify-content:center;gap:7px">
-        <div class="modal-option" data-region="US" onclick="selectRegion('US')" style="padding:9px 12px;font-size:10px">🇺🇸 USA</div>
-        <div class="modal-option" data-region="CA" onclick="selectRegion('CA')" style="padding:9px 12px;font-size:10px">🇨🇦 CANADA</div>
-        <div class="modal-option" data-region="GB" onclick="selectRegion('GB')" style="padding:9px 12px;font-size:10px">🇬🇧 UK</div>
+      <div class="char-card" data-char="female1" onclick="selectChar('female1')">
+        <div class="char-preview"><svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="fGrad1" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#d4af37"/><stop offset="100%" stop-color="#8a6e1a"/></linearGradient></defs><circle cx="50" cy="45" r="22" fill="#0a0a0f" stroke="url(#fGrad1)" stroke-width="2"/><path d="M38,55 Q50,70 62,55 L62,85 L38,85Z" fill="#0a0a0f" stroke="url(#fGrad1)" stroke-width="2"/><path d="M40,35 Q35,25 45,30 M60,35 Q65,25 55,30" fill="none" stroke="#d4af37" stroke-width="1.5"/><circle cx="44" cy="42" r="3" fill="#d4af37"/><circle cx="56" cy="42" r="3" fill="#d4af37"/><path d="M45,48 Q50,51 55,48" fill="none" stroke="#d4af37" stroke-width="1.5"/></svg></div>
+        <div class="char-name">ARCHITECT</div><div class="char-role">FEMALE TYPE 1</div>
+      </div>
+      <div class="char-card" data-char="female2" onclick="selectChar('female2')">
+        <div class="char-preview"><svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="fGrad2" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#d4af37"/><stop offset="100%" stop-color="#8a6e1a"/></linearGradient></defs><circle cx="50" cy="45" r="22" fill="#0a0a0f" stroke="url(#fGrad2)" stroke-width="2"/><path d="M38,55 Q50,70 62,55 L62,85 L38,85Z" fill="#0a0a0f" stroke="url(#fGrad2)" stroke-width="2"/><path d="M40,35 Q35,25 45,30 M60,35 Q65,25 55,30" fill="none" stroke="#d4af37" stroke-width="1.5"/><circle cx="44" cy="42" r="3" fill="#d4af37"/><circle cx="56" cy="42" r="3" fill="#d4af37"/><path d="M45,48 Q50,51 55,48" fill="none" stroke="#d4af37" stroke-width="1.5"/></svg></div>
+        <div class="char-name">ARCHITECT</div><div class="char-role">FEMALE TYPE 2</div>
       </div>
     </div>
     <button class="btn-primary" id="confirm-char-btn" onclick="confirmCharSelection()" disabled style="margin-top:12px;width:100%">⚡ CONFIRM & LAUNCH</button>
@@ -456,15 +456,13 @@ body::after{content:'';position:fixed;inset:0;background:repeating-linear-gradie
 
 <script>
 // ==================== CONFIG ====================
-const LOCALE_CONFIG = {US:{currency:'$',pension:'401(k)/Roth IRA'},CA:{currency:'C$',pension:'TFSA/RRSP'},GB:{currency:'£',pension:'ISA/SIPP'}};
-// 🔴 ВАЖНО: Вставь сюда свои реальные реферальные ссылки из Impact/CJ/Affiliate сетей
 const AFFILIATE_LINKS = {
-  nordvpn: "https://nordvpn.sjv.io/9VezoE", // День 5
-  dataRemoval: "https://goto.mydataremoval.com/n4R3jA", // День 16
-  nexo: "https://nexo.sjv.io/YV1PNP" // День 22
+  nordvpn: "https://nordvpn.sjv.io/9VezoE", 
+  dataRemoval: "https://goto.mydataremoval.com/n4R3jA", 
+  nexo: "https://nexo.sjv.io/YV1PNP" 
 };
 
-// ==================== DAYS DATA (EDUCATIONAL + OFFERS) ====================
+// ==================== DAYS DATA (EDUCATIONAL) ====================
 const DAYS = [
   {day:1,title:"THE SILENT AUDIT",theory:"Money leaks aren't just subscriptions. They're micro-decisions: coffee, convenience fees, impulse scrolling. Visibility is the first step to control.",task:"Open your bank app. Export last 90 days. Categorize every expense into: Survival, Growth, or Noise.",tip:"Use the 3-category rule. If it doesn't keep you alive, make you better, or buy you time, it's Noise.",mission:"Find exactly where your money is bleeding.",steps:[{name:"Export bank statements",desc:"Last 90 days. Hard numbers only."},{name:"Categorize expenses",desc:"Base Survival vs Time-Buying vs Noise."},{name:"Calculate monthly leaks",desc:"Sum the Noise. Face the number."}],timeline:[{time:"08:00",action:"Export statements"},{time:"12:00",action:"Categorize expenses"},{time:"20:00",action:"Calculate total leaks"}],bonus:"🎁 <strong>THE BONUS:</strong> Financial Sobriety. The fog clears.",command:"EXECUTED",rewards:{capital:15,focus:5,vitality:0,sovereignty:10},achievement:{title:"FIRST MOVE",desc:"The audit begins."},assistantHint:"Start with your bank app's monthly export. Don't judge the numbers yet. Just label them: Survival (rent, food), Growth (skills, health), Noise (everything else)."},
   {day:2,title:"THE $50 RULE",theory:"Impulse buying exploits dopamine. A 24-hour delay breaks the cycle. Most 'urgent' purchases vanish when you stop.",task:"Set a rule: Any non-survival purchase over $50 waits 24h. Write it down.",tip:"The question isn't 'Can I afford this?' It's 'Does this buy freedom or add noise?'",mission:"Install the first barrier against impulse.",steps:[{name:"24-hour buffer",desc:"Any non-survival purchase over $50 waits 24h."},{name:"Friction logic",desc:"Write it down. Close tab. Walk away."},{name:"Sovereign question",desc:"Does this buy freedom or add noise?"}],timeline:[{time:"08:00",action:"Capital moves first"},{time:"12:00",action:"Impulse check"},{time:"20:00",action:"Audit impulses killed"}],bonus:"🎁 <strong>THE BONUS:</strong> By tomorrow, 80% of urgent desires vanish.",command:"EXECUTED",rewards:{capital:10,focus:15,vitality:0,sovereignty:10},achievement:{title:"IMPULSE KILLER",desc:"The $50 barrier is active."},assistantHint:"Create a literal note on your phone: '$50 Rule: 24h delay.' Put it as your lock screen wallpaper for 3 days."},
@@ -493,7 +491,7 @@ const DAYS = [
   {day:25,title:"DEEP RESEARCH",theory:"Headlines create noise. Primary sources create edge. 3 hours of deep reading > 30 days of scrolling.",task:"Define 1 high-value question. Read books/reports/studies. Write 1-paragraph insight.",tip:"Search academic journals, SEC filings, government data. Avoid opinion. Follow data.",mission:"Expand the fortress walls with new knowledge.",steps:[{name:"The question",desc:"Define single most valuable question fortress needs."},{name:"Primary sources",desc:"3 hours on primary sources only. Books, studies, reports."},{name:"The insight",desc:"Write one-paragraph summary of most valuable learning."}],timeline:[{time:"08:00",action:"Write question precisely"},{time:"12:00",action:"3h primary research"},{time:"20:00",action:"Write insight summary"}],bonus:"🎁 <strong>THE BONUS:</strong> One correct insight can generate 10–100× return.",command:"RESEARCHED",rewards:{capital:10,focus:25,vitality:0,sovereignty:20},achievement:{title:"SIGNAL EXTRACTED",desc:"Deep research complete."},assistantHint:"Example: 'How do top 1% structure retirement?' Read IRS pubs, academic papers, founder interviews. Synthesize."},
   {day:26,title:"NETWORK AUDIT",theory:"Your network is your net worth. Drain contacts trigger spending. Builders trigger compounding.",task:"Rate top 20 contacts. Reduce drain frequency. Message 1 builder. Offer value first.",tip:"Don't cut ties abruptly. Shift interaction frequency. Add signal. Subtract noise.",mission:"Identify and connect with sovereign allies.",steps:[{name:"Full audit",desc:"List top 20 contacts. Rate: adds value / neutral / drains."},{name:"The prune",desc:"Reduce contact frequency with drain contacts."},{name:"The connect",desc:"Identify one person at target level. Send value-first message."}],timeline:[{time:"08:00",action:"List & rate contacts"},{time:"12:00",action:"Reduce drain contacts"},{time:"20:00",action:"Send sovereign message"}],bonus:"🎁 <strong>THE BONUS:</strong> Five closest contacts determine trajectory.",command:"AUDITED",rewards:{capital:10,focus:15,vitality:0,sovereignty:25},achievement:{title:"NETWORK SOVEREIGN",desc:"Circle clean. Allies identified."},assistantHint:"Message template: 'Saw your work on X. Built Y recently. Happy to share notes if useful.' No asks. Just value."},
   {day:27,title:"THE FRICTION TEST",theory:"Every 'yes' to noise is a 'no' to freedom. Friction is the tax on weak boundaries.",task:"List regretted 'yeses' last month. Write default 'no'. Apply it today. Log results.",tip:"'That doesn't fit my current priorities.' Polite. Firm. Final. Practice until automatic.",mission:"Master the most powerful word in finance: No.",steps:[{name:"The no list",desc:"List every yes last month you shouldn't have given."},{name:"The sovereign response",desc:"Write default no: 'That doesn't fit my priorities.'"},{name:"Real-time application",desc:"Say no to first non-essential request today. Log it."}],timeline:[{time:"08:00",action:"List regretted yeses"},{time:"12:00",action:"Practice sovereign no"},{time:"20:00",action:"Log today's nos"}],bonus:"🎁 <strong>THE BONUS:</strong> Every no to noise is a yes to fortress.",command:"REFUSED",rewards:{capital:10,focus:20,vitality:0,sovereignty:25},achievement:{title:"NO IS SOVEREIGN",desc:"Most powerful word active."},assistantHint:"Don't over-explain. No justification = no negotiation. Test it once today. Notice the relief."},
-  {day:28,title:"DIGITAL SECURITY",theory:"90% of breaches use compromised passwords. Master keys (email) get targeted first. Friction stops attacks.",task:"Audit financial passwords. Enable 2FA everywhere. Secure email. Register domain/hosting.",tip:"Password manager + hardware key = impenetrable. Convenience breeds compromise. Choose control.",mission:"Make your fortress impenetrable.",steps:[{name:"Password audit",desc:"Every financial account: unique 20+ char password. Use password manager."},{name:"Two-factor everything",desc:"Enable 2FA on every financial account, email, investment."},{name:"Email security",desc:"Your email is master key. Unique password. 2FA mandatory."},{name:"◈ SECURE YOUR INFRASTRUCTURE",desc:"Register domain + hosting for your sovereign project.",highlight:true}],timeline:[{time:"08:00",action:"Audit passwords"},{time:"12:00",action:"Enable 2FA"},{time:"20:00",action:"Secure email"}],bonus:"🎁 <strong>THE BONUS:</strong> 90% of takeovers use compromised passwords.<br><br>🌐 <strong>VERIFICATION:</strong> Domain + hosting secured.",command:"SECURED",rewards:{capital:5,focus:10,vitality:0,sovereignty:35},achievement:{title:"FORTRESS LOCKED",desc:"Digital perimeter impenetrable."},verificationGate:{required:true,title:"◈ SECURE YOUR DIGITAL INFRASTRUCTURE",desc:"Establish your sovereign web presence:",checks:["Domain registered in your name","Hosting account created","SSL certificate enabled","Basic site structure deployed"],cta:{text:"🔗 GET DOMAIN + HOSTING — START AT $2.95/MO",link:"#"},confirmText:"I have secured my infrastructure",bonusReward:{sovereignty:15}},assistantHint:"Use Bitwarden/1Password. Generate 20-char passwords. Enable TOTP 2FA. Backup recovery codes offline."},
+  {day:28,title:"DIGITAL SECURITY",theory:"90% of breaches use compromised passwords. Master keys (email) get targeted first. Friction stops attacks.",task:"Audit financial passwords. Enable 2FA everywhere. Secure email. Register domain/hosting.",tip:"Password manager + hardware key = impenetrable. Convenience breeds compromise. Choose control.",mission:"Make your fortress impenetrable.",steps:[{name:"Password audit",desc:"Every financial account: unique 20+ char password. Use password manager."},{name:"Two-factor everything",desc:"Enable 2FA on every financial account, email, investment."},{name:"Email security",desc:"Your email is master key. Unique password. 2FA mandatory."},{name:"◈ SECURE YOUR INFRASTRUCTURE",desc:"Register domain + hosting for your sovereign project.",highlight:true}],timeline:[{time:"08:00",action:"Audit passwords"},{time:"12:00",action:"Enable 2FA"},{time:"20:0  {day:28,title:"DIGITAL SECURITY",theory:"90% of breaches use compromised passwords. Master keys (email) get targeted first. Friction stops attacks.",task:"Audit financial passwords. Enable 2FA everywhere. Secure email. Register domain/hosting.",tip:"Password manager + hardware key = impenetrable. Convenience breeds compromise. Choose control.",mission:"Make your fortress impenetrable.",steps:[{name:"Password audit",desc:"Every financial account: unique 20+ char password. Use password manager."},{name:"Two-factor everything",desc:"Enable 2FA on every financial account, email, investment."},{name:"Email security",desc:"Your email is master key. Unique password. 2FA mandatory."},{name:"◈ SECURE YOUR INFRASTRUCTURE",desc:"Register domain + hosting for your sovereign project.",highlight:true}],timeline:[{time:"08:00",action:"Audit passwords"},{time:"12:00",action:"Enable 2FA"},{time:"20:00",action:"Secure email"}],bonus:"🎁 <strong>THE BONUS:</strong> 90% of takeovers use compromised passwords.<br><br>🌐 <strong>VERIFICATION:</strong> Domain + hosting secured.",command:"SECURED",rewards:{capital:5,focus:10,vitality:0,sovereignty:35},achievement:{title:"FORTRESS LOCKED",desc:"Digital perimeter impenetrable."},verificationGate:{required:true,title:"◈ SECURE YOUR DIGITAL INFRASTRUCTURE",desc:"Establish your sovereign web presence:",checks:["Domain registered in your name","Hosting account created","SSL certificate enabled","Basic site structure deployed"],cta:{text:"🔗 GET DOMAIN + HOSTING — START AT $2.95/MO",link:"#"},confirmText:"I have secured my infrastructure",bonusReward:{sovereignty:15}},assistantHint:"Use Bitwarden/1Password. Generate 20-char passwords. Enable TOTP 2FA. Backup recovery codes offline."},
   {day:29,title:"THE FINAL SUNSET",theory:"30 days of execution rewires behavior. Review creates clarity. Clarity compounds results.",task:"Calculate total recovered. Review stats. Identify gaps. Design Month 2 at higher standard.",tip:"Don't restart. Level up. Same systems. Tighter margins. Higher focus. You're not beginner anymore.",mission:"Review 30 days of silent execution.",steps:[{name:"30-day measurement",desc:"Pull Day 10 recovery. Add Phase II+III. Total result."},{name:"Score review",desc:"Review stats. Capital, Focus, Sovereignty — gaps?"},{name:"Next phase design",desc:"Write Month 2 objective. Same system. Higher standard."}],timeline:[{time:"08:00",action:"Calculate total recovered"},{time:"12:00",action:"Review stats & gaps"},{time:"20:00",action:"Write Month 2 objective"}],bonus:"🎁 <strong>THE BONUS:</strong> Most who complete 30 days never return to old life.",command:"REVIEWED",rewards:{capital:15,focus:20,vitality:5,sovereignty:20},achievement:{title:"SUNSET COMPLETE",desc:"30 days measured."},assistantHint:"Export your spreadsheet. Compare Day 1 vs Day 29. Note what stuck. Double down on winners. Cut losers."},
   {day:30,title:"SOVEREIGN ACTIVATION",theory:"You don't chase money. You attract it through systems, skills, and silence. The protocol is complete.",task:"Read Oath. Write fortress report. Set next 30-day target. Activate Sovereign Engine.",tip:"The end of phase 1 is the start of compounding. Repeat the cycle. Raise the bar. Stay quiet.",mission:"You no longer chase money. You attract it.",steps:[{name:"The declaration",desc:"Read Sovereign Oath. Every rule — living it? Adjust if needed."},{name:"The fortress report",desc:"Write one-page report: where started, what built, what remains."},{name:"The continuation",desc:"Set next 30-day target. Same system. Higher standard."},{name:"◈ ACTIVATE SOVEREIGN ENGINE",desc:"Connect final VIP tool to automate your fortress.",highlight:true}],timeline:[{time:"08:00",action:"Read oath & verify"},{time:"12:00",action:"Write fortress report"},{time:"20:00",action:"Set next target"}],bonus:"🎁 <strong>THE BONUS:</strong> You no longer chase money. You attract it.<br><br>⚙️ <strong>VERIFICATION:</strong> Sovereign Engine activated.",command:"ACTIVATED",rewards:{capital:20,focus:20,vitality:10,sovereignty:30},achievement:{title:"SOVEREIGN ARCHITECT",desc:"Protocol complete. Architect live."},verificationGate:{required:true,title:"◈ ACTIVATE YOUR SOVEREIGN ENGINE",desc:"Deploy the final tool that automates your financial fortress:",checks:["VIP tool account created","Integration with existing systems","Automation rules configured","First automated action executed"],cta:{text:"🔗 ACTIVATE SOVEREIGN ENGINE — VIP ACCESS",link:"#"},confirmText:"I have activated my Sovereign Engine",bonusReward:{capital:20,sovereignty:20}},assistantHint:"Review your automation stack. Connect APIs where possible. Set monthly review. You're now running the system."}
 ];
@@ -502,8 +500,8 @@ const FAKE_PLAYERS = [{name:"MARCUS_V",day:28,score:2840},{name:"ALEXK",day:25,s
 const ACTIVITY_TEMPLATES = [{name:"MARCUS_V",actions:["completed Day 28","earned achievement: GHOST MODE","+25 Sovereignty"],type:"success"},{name:"ALEXK",actions:["completed Day 25","+20 Capital","killed 3 subscriptions"],type:"success"},{name:"IRON_WILL",actions:["Day 22 — MOAT opened","completed Hard Asset Drill","+15 Sovereignty"],type:"info"},{name:"SILENT_OAK",actions:["completed Day 19 — Tax Hygiene","recovered $89 this month"],type:"info"},{name:"DARKFORT",actions:["Day 17 — Market Detox","deleted 4 financial apps"],type:"info"},{name:"ZERO_DB",actions:["completed Day 15","MOAT funded: $1,500"],type:"success"},{name:"FORTRESS_X",actions:["Day 12 — Network mapped","cut 2 drain contacts"],type:"info"},{name:"QUIET_ONE",actions:["completed Day 9 — Clean Fuel","saved $180/month"],type:"success"},{name:"ARCH_88",actions:["Day 6 — Dead assets converted","sold 5 items: +$340"],type:"info"},{name:"NEWBLOOD",actions:["just started Protocol","Day 1 — Silent Audit"],type:"new"}];
 
 // ==================== STATE ====================
-let state = {name:'',region:'US',charType:'male',day:1,capital:0,focus:0,vitality:0,sovereignty:0,score:0,stepsCompleted:[],dayCompleted:false,streak:0,lastActive:null,unlocked:[1],achievements:[]};
-let selectedChar = null, selectedRegion = null;
+let state = {name:'',charType:'male1',day:1,capital:0,focus:0,vitality:0,sovereignty:0,score:0,stepsCompleted:[],dayCompleted:false,streak:0,lastActive:null,unlocked:[1],achievements:[]};
+let selectedChar = null;
 let audioCtx = null, masterGain = null, musicNodes = [], musicPlaying = false, audioEnabled = true;
 let idleTimer = null;
 const canvas = document.getElementById('bg-canvas'), ctx = canvas.getContext('2d');
@@ -578,11 +576,10 @@ animateCanvas();
 
 // ==================== CHAR & REGION ====================
 function selectChar(type){ selectedChar = type; document.querySelectorAll('.char-card').forEach(c=>c.classList.remove('selected')); document.querySelector(`.char-card[data-char="${type}"]`).classList.add('selected'); checkCharReady(); }
-function selectRegion(region){ selectedRegion = region; document.querySelectorAll('.modal-option').forEach(el=>el.classList.remove('selected')); const sel = document.querySelector(`[data-region="${region}"]`); if(sel) sel.classList.add('selected'); checkCharReady(); }
-function checkCharReady(){ document.getElementById('confirm-char-btn').disabled = !(selectedChar && selectedRegion); }
+function checkCharReady(){ document.getElementById('confirm-char-btn').disabled = !(selectedChar); }
 function confirmCharSelection(){
-  if(!selectedChar || !selectedRegion) return;
-  state.charType = selectedChar; state.region = selectedRegion;
+  if(!selectedChar) return;
+  state.charType = selectedChar;
   document.getElementById('onboarding').style.display = 'none';
   saveState(); showScreen('loading'); runLoading();
 }
@@ -591,11 +588,16 @@ function confirmCharSelection(){
 function renderHeaderChar(){
   const iconEl = document.getElementById('char-icon'), levelEl = document.getElementById('char-level'), dayEl = document.getElementById('char-day'), ringFill = document.getElementById('char-ring-fill'), charWrap = document.getElementById('header-char');
   if(!iconEl) return;
+  
+  // SVG Icons for characters
   const svgs = {
-    male: `<svg viewBox="0 0 100 100"><circle cx="50" cy="45" r="22" fill="#0a0a0f" stroke="var(--gold)" stroke-width="2"/><path d="M38,55 Q50,75 62,55 L62,85 L38,85Z" fill="#0a0a0f" stroke="var(--gold)" stroke-width="2"/><rect x="42" y="60" width="16" height="12" rx="2" fill="none" stroke="var(--gold)" stroke-width="1.5"/><circle cx="44" cy="42" r="3" fill="var(--gold)"/><circle cx="56" cy="42" r="3" fill="var(--gold)"/><path d="M44,48 Q50,52 56,48" fill="none" stroke="var(--gold)" stroke-width="1.5"/></svg>`,
-    female: `<svg viewBox="0 0 100 100"><circle cx="50" cy="45" r="22" fill="#0a0a0f" stroke="var(--gold)" stroke-width="2"/><path d="M38,55 Q50,70 62,55 L62,85 L38,85Z" fill="#0a0a0f" stroke="var(--gold)" stroke-width="2"/><path d="M40,35 Q35,25 45,30 M60,35 Q65,25 55,30" fill="none" stroke="var(--gold)" stroke-width="1.5"/><circle cx="44" cy="42" r="3" fill="var(--gold)"/><circle cx="56" cy="42" r="3" fill="var(--gold)"/><path d="M45,48 Q50,51 55,48" fill="none" stroke="var(--gold)" stroke-width="1.5"/></svg>`
+    male1: `<svg viewBox="0 0 100 100"><circle cx="50" cy="45" r="22" fill="#0a0a0f" stroke="var(--gold)" stroke-width="2"/><path d="M38,55 Q50,75 62,55 L62,85 L38,85Z" fill="#0a0a0f" stroke="var(--gold)" stroke-width="2"/><rect x="42" y="60" width="16" height="12" rx="2" fill="none" stroke="var(--gold)" stroke-width="1.5"/><circle cx="44" cy="42" r="3" fill="var(--gold)"/><circle cx="56" cy="42" r="3" fill="var(--gold)"/><path d="M44,48 Q50,52 56,48" fill="none" stroke="var(--gold)" stroke-width="1.5"/></svg>`,
+    male2: `<svg viewBox="0 0 100 100"><circle cx="50" cy="45" r="22" fill="#0a0a0f" stroke="var(--gold)" stroke-width="2"/><path d="M38,55 Q50,75 62,55 L62,85 L38,85Z" fill="#0a0a0f" stroke="var(--gold)" stroke-width="2"/><rect x="42" y="60" width="16" height="12" rx="2" fill="none" stroke="var(--gold)" stroke-width="1.5"/><circle cx="44" cy="42" r="3" fill="var(--gold)"/><circle cx="56" cy="42" r="3" fill="var(--gold)"/><path d="M44,48 Q50,52 56,48" fill="none" stroke="var(--gold)" stroke-width="1.5"/></svg>`,
+    female1: `<svg viewBox="0 0 100 100"><circle cx="50" cy="45" r="22" fill="#0a0a0f" stroke="var(--gold)" stroke-width="2"/><path d="M38,55 Q50,70 62,55 L62,85 L38,85Z" fill="#0a0a0f" stroke="var(--gold)" stroke-width="2"/><path d="M40,35 Q35,25 45,30 M60,35 Q65,25 55,30" fill="none" stroke="var(--gold)" stroke-width="1.5"/><circle cx="44" cy="42" r="3" fill="var(--gold)"/><circle cx="56" cy="42" r="3" fill="var(--gold)"/><path d="M45,48 Q50,51 55,48" fill="none" stroke="var(--gold)" stroke-width="1.5"/></svg>`,
+    female2: `<svg viewBox="0 0 100 100"><circle cx="50" cy="45" r="22" fill="#0a0a0f" stroke="var(--gold)" stroke-width="2"/><path d="M38,55 Q50,70 62,55 L62,85 L38,85Z" fill="#0a0a0f" stroke="var(--gold)" stroke-width="2"/><path d="M40,35 Q35,25 45,30 M60,35 Q65,25 55,30" fill="none" stroke="var(--gold)" stroke-width="1.5"/><circle cx="44" cy="42" r="3" fill="var(--gold)"/><circle cx="56" cy="42" r="3" fill="var(--gold)"/><path d="M45,48 Q50,51 55,48" fill="none" stroke="var(--gold)" stroke-width="1.5"/></svg>`
   };
-  iconEl.innerHTML = svgs[state.charType] || svgs.male;
+  
+  iconEl.innerHTML = svgs[state.charType] || svgs.male1;
   const level = Math.ceil(state.day / 3);
   levelEl.textContent = `LV.${level}`; dayEl.textContent = state.day;
   const progress = (state.day - 1) / 29;
@@ -608,9 +610,8 @@ function renderHeaderChar(){
 }
 
 // ==================== LOCALIZATION & INIT ====================
-function getUserLocale(){ const lang=navigator.language||navigator.userLanguage; if(lang.startsWith('en-GB'))return'GB'; if(lang.startsWith('en-CA'))return'CA'; return'US'; }
-function formatTime(hour){ const isUS=state.region!=='GB'; const h=hour%12||12; return isUS?`${h}:00 ${hour<12?'AM':'PM'}`:`${String(hour).padStart(2,'0')}:00`; }
-function localizeText(text){ if(!text) return ''; const c=LOCALE_CONFIG[state.region]; return text.replace(/\$50/g,c.currency+'50').replace(/\$10/g,c.currency+'10').replace(/\$15/g,c.currency+'15').replace(/\$1/g,c.currency+'1').replace(/\$200/g,c.currency+'200').replace(/\$300/g,c.currency+'300').replace(/\$400/g,c.currency+'400').replace(/\$500/g,c.currency+'500').replace(/\$100/g,c.currency+'100').replace(/\$89/g,c.currency+'89').replace(/\$147/g,c.currency+'147').replace(/\$180/g,c.currency+'180').replace(/\$340/g,c.currency+'340').replace(/\$487/g,c.currency+'487').replace(/\$2,400/g,c.currency+'2,400').replace(/\$6,000/g,c.currency+'6,000'); }
+function formatTime(hour){ const h=hour%12||12; return `${h}:00 ${hour<12?'AM':'PM'}`; }
+function localizeText(text){ if(!text) return ''; return text; } // Simplified since we removed regions
 function applyLocalization(){
   const t08 = document.getElementById('time-08'), t12 = document.getElementById('time-12'), t20 = document.getElementById('time-20');
   if(t08) t08.textContent = formatTime(8); if(t12) t12.textContent = formatTime(12); if(t20) t20.textContent = formatTime(20);
@@ -624,10 +625,9 @@ function initProtocol(){
     const saved=localStorage.getItem('qw_state_'+state.name);
     if(saved){
       const s=JSON.parse(saved); state={...state,...s}; checkStreak();
-      if(state.region && state.charType){
-        selectedChar = state.charType; selectedRegion = state.region;
+      if(state.charType){
+        selectedChar = state.charType;
         document.querySelector(`.char-card[data-char="${state.charType}"]`)?.classList.add('selected');
-        document.querySelector(`[data-region="${state.region}"]`)?.classList.add('selected');
         checkCharReady();
         document.getElementById('onboarding').style.display='flex';
         return;
@@ -840,8 +840,6 @@ function trackOfferClick(offerName, url){
   clicks[offerName] = (clicks[offerName] || 0) + 1;
   localStorage.setItem('qw_offer_clicks', JSON.stringify(clicks));
   console.log(`🔗 OFFER CLICK TRACKED: ${offerName} → ${url}`);
-  // Если добавишь GA4, просто раскомментируй:
-  // if(typeof gtag !== 'undefined') gtag('event', 'affiliate_click', {offer: offerName, day: state.day, url: url});
 }
 
 // ==================== MAP ====================
@@ -908,7 +906,7 @@ function startIntroLiveFeed(){
   let idx=0; function showNext(){ feed.innerHTML=templates[idx%templates.length]; idx++; setTimeout(showNext,3000+Math.random()*1200); } showNext();
 }
 function spawnIntroBadges(){
-  const badges=['🇺 Marcus Day 28','🇨🇦 Alex saved $147/mo','🇬 Iron activated VPN','🇺🇸 Silent_Oak Day 19','🇨 Zero_DB MOAT: $1,500'];
+  const badges=['🇺 Marcus Day 28','🇨 Alex saved $147/mo','🇬 Iron activated VPN','🇺🇸 Silent_Oak Day 19','🇨 Zero_DB MOAT: $1,500'];
   setInterval(()=>{ if(!document.getElementById('intro').classList.contains('active')) return; const badge=document.createElement('div'); badge.className='floating-badge'; badge.textContent=badges[Math.floor(Math.random()*badges.length)]; badge.style.left=(10+Math.random()*80)+'%'; badge.style.top=(20+Math.random()*60)+'%'; document.body.appendChild(badge); setTimeout(()=>badge.remove(),5500); },3500);
 }
 function spawnCoreParticles(){
